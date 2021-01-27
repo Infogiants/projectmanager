@@ -1,0 +1,20 @@
+td.action,
+td.order_itmes {
+    width: 270px;
+}
+
+td.order_id {
+    width: 100px;
+}
+
+.status-align {
+    margin: 3px;
+}
+
+.boxed {
+    border: 1px solid #4e73df;
+    padding: 3px;
+    background: #4e73df;
+    color: #fff;
+    margin-top: 2px;
+}
