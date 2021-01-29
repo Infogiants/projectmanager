@@ -38,5 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('stores', 'StoreController');
     Route::resource('categories', 'CategoryController');
     Route::resource('projects', 'ProjectController');
+    Route::resource('projects/documents', 'DocumentController');
+    Route::resource('projects/tasks', 'TaskController');
+    Route::resource('projects/milestones', 'MileStoneController');
 });
 

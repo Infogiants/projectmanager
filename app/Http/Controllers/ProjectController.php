@@ -229,4 +229,18 @@ class ProjectController extends Controller
             return redirect('/projects')->with('errors', 'Invalid Project to delete!');
         }
     }
+
+    /**
+     * Store project documents.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function documents(Request $request)
+    {   
+        print_r($request->all());
+        die;
+        $files = $request->file('file');
+        dd($files);
+    }
 }

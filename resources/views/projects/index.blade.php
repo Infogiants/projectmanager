@@ -23,12 +23,12 @@
          </div>
    </div>
    <div class="col-lg-2">
-         <div class="card mb-4 border-left-primary">
+         <div class="card mb-4 border-left-warning">
             <div class="card-body">
                <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">In-Progress</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
                   </div>
                   <div class="col-auto">
                      <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -38,12 +38,12 @@
          </div>
    </div>
    <div class="col-lg-2">
-         <div class="card mb-4 border-left-primary">
+         <div class="card mb-4 border-left-success">
             <div class="card-body">
                <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Completed</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
                   </div>
                   <div class="col-auto">
                      <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
