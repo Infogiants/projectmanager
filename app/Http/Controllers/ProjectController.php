@@ -36,7 +36,7 @@ class ProjectController extends Controller
         if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())):
             $projects = Project::orderByDesc('id')->paginate(4);
         else:
-            $projects = Project::where('user_id', Auth::user()->id)->orderByDesc('id')->paginate(4);
+            $projects = Project::where('client_user_id', Auth::user()->id)->orderByDesc('id')->paginate(4);
         endif;
         return view('projects.index', compact('projects'));
     }
@@ -118,7 +118,12 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::find($id);
+        if ($project) {
+            return view('projects.view', compact('project'));   
+        } else {
+            return redirect('/projects')->with('errors', 'Invalid project to view!');
+        }
     }
 
     /**

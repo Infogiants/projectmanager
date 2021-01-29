@@ -22,8 +22,8 @@
           <div class="col-12">
             <div class="row justify-content-center">
               <div class="col-md-7 text-center hero-text">
-                <h1 data-aos="fade-up" data-aos-delay="">Register</h1>
-                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Register now, to get access to Free plan. You will get an email to verify your account after registration.</p>
+                <h1 data-aos="fade-up" data-aos-delay="">Client Registration</h1>
+                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Register now, to get access to client dashboard. You will get an email to verify your account after registration.</p>
               </div>
             </div>
           </div>

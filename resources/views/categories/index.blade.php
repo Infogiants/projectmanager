@@ -8,6 +8,7 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800">Categories</h1>
 </div>
+<p class="mb-4">Your projects categories section, you can manage your project categories from this page.</p>
 <div>
    @if(session()->get('success'))
    <div class="alert alert-success">

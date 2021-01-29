@@ -8,6 +8,7 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800">Permissions</h1>
 </div>
+<p class="mb-4">Note: User roles permission section, Only for advanced users for customizations in webapp.</p>
 <div>
    @if(session()->get('success'))
    <div class="alert alert-success">

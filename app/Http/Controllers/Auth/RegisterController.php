@@ -71,11 +71,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         
-        if (array_key_exists('type', $data) && ($data['type'] == 'customer')) {
-            $user->roles()->sync(Role::whereIn('slug', (['customer']) ?? [])->get());
-        } else {
-            $user->roles()->sync(Role::whereIn('slug', (['user']) ?? [])->get());
-        }
+        $user->roles()->sync(Role::whereIn('slug', (['user']) ?? [])->get());
         return $user;
     }
 }

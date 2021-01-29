@@ -5,6 +5,7 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800">Projects</h1>
 </div>
+<p class="mb-4">Your projects section, you can manage your project from this page.</p>
 <div class="row">
    <div class="col-lg-2">
          <div class="card mb-4 py-3 border-left-primary">
@@ -64,9 +65,11 @@
    </div>
    @endif
 </div>
+<?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
 <div>
    <a href="{{ route('projects.create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus" aria-hidden="true"></i> Add New Project</a>
-</div>
+</div> 
+<?php endif; ?>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
    <div class="card-body">
@@ -77,10 +80,14 @@
                   <th>ID</th>
                   <th>Image</th>
                   <th>Name</th>
-                  <th>Selling Price</th>
+                  <th>Price</th>
                   <th>Status</th>
-                  <th>Client</th>
-                  <th colspan="4">Actions</th>
+                  <?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
+                     <th>Client</th>
+                     <th colspan="3">Actions</th>
+                  <?php else: ?>
+                     <th>Actions</th>
+                  <?php endif; ?>
                </tr>
             </thead>
             <tbody>
@@ -97,23 +104,26 @@
                   <td>{{$project->project_name}}</td>
                   <td>{{$project->project_price}} &#8377;</td>
                   <td><?php echo ($project->project_status == '1') ? '<i class="fas fa-toggle-on"></i> In-Progress' : '<i class="fas fa-toggle-off"></i> Completed'; ?></td>
-                  <td><a href="{{ route('users.show',$project->client_user_id)}}">{{ $project->client_user_id }}<a/></td>
-                  <td>
-                     <a href="{{ route('projects.edit',$project->id)}}" class="btn btn-primary">Edit</a>
-                  </td>
-                  <td>
-                     <a href="{{ route('projects.edit',$project->id)}}" class="btn btn-primary">Milestones</a>
-                  </td>
-                  <td>
-                     <a href="{{ route('projects.edit',$project->id)}}" class="btn btn-primary">Tasks</a>
-                  </td>
-                  <td>
-                     <form action="{{ route('projects.destroy', $project->id)}}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                     </form>
-                  </td>
+                  <?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
+                     <td><a href="{{ route('users.show',$project->client_user_id)}}">{{ $project->client_user_id }}<a/></td>
+                     <td>
+                        <a href="{{ route('projects.show',$project->id)}}" class="btn btn-primary">Manage</a>
+                     </td>
+                     <td>
+                        <a href="{{ route('projects.edit',$project->id)}}" class="btn btn-primary">Edit Details</a>
+                     </td>
+                     <td>
+                        <form action="{{ route('projects.destroy', $project->id)}}" method="post">
+                           @csrf
+                           @method('DELETE')
+                           <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                     </td>
+                  <?php else: ?>
+                     <td>
+                        <a href="{{ route('projects.show',$project->id)}}" class="btn btn-primary">Manage</a>
+                     </td>
+                  <?php endif; ?>
                </tr>
                @endforeach
             </tbody>

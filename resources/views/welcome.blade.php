@@ -23,8 +23,8 @@
                     <div class="row">
                         <div class="col-lg-7 text-center text-lg-left">
                             <h1 data-aos="fade-right">Complete Project Management</h1>
-                            <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Manage all your clients and projects at one place.</p>
-                            <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="{{ route('login') }}" class="btn btn-outline-white">Get Access</a></p>
+                            <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Manage all your projects at one place.</p>
+                            <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="{{ route('login') }}" class="btn btn-outline-white">Client Registration</a></p>
                         </div>
                         <div class="col-lg-5 iphone-wrap">
                             <img src="demo_images/home_logo.svg" alt="Image" class="phone-1" data-aos="fade-right">

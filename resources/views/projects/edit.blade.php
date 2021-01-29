@@ -82,7 +82,7 @@
                     <select class="form-control {{ $errors->has('client_user_id') ? 'is-invalid' : '' }}" id="client_user_id" name="client_user_id" value="{{ $project->client_user_id }}">
                         <option value="">Select Client</option>
                         @foreach($users as $user)
-                            <option value="{{$user->id}}" {{ $user->client_user_id == $user->id ? 'selected' : '' }}>{{$user->name}} | {{ $user->email }}</option>
+                            <option value="{{$user->id}}" {{ $project->client_user_id == $user->id ? 'selected' : '' }}>{{$user->name}} | {{ $user->email }}</option>
                         @endforeach
                     </select>
                 </div>

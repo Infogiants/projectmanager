@@ -67,9 +67,12 @@
                         <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                             <li class="active"><a href="{{ url('/') }}" class="nav-link">Home</a></li>
                             <li><a href="{{ url('/features') }}" class="nav-link">Features</a></li>
-                            <li><a href="{{ url('/pricing') }}" class="nav-link">Pricing</a></li>
+                            <!-- <li><a href="{{ url('/pricing') }}" class="nav-link">Pricing</a></li> -->
                             @guest
                                 <li><a href="{{ route('login') }}" class="nav-link">Login</a></li>
+                                @if (Route::has('register'))
+                                    <li><a href="{{ route('register') }}" class="nav-link">Client Registration</a></li>
+                                @endif
                             @endguest 
                             <?php
                             if (!empty(Auth::user())):
@@ -117,7 +120,7 @@
             <div class="row">
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h3>About {{ config('app.name', 'MyProjects') }}</h3>
-                    <p>We want individual or small to medium business to enable mange their projects and clients online using our software to help their business and customers.</p>
+                    <p>MyProjects enables individual or small to medium business to mange their projects and clients online to help their business and customers.</p>
                     <p class="social">
                         <a href="#"><span class="icofont-twitter"></span></a>
                         <a href="#"><span class="icofont-facebook"></span></a>
@@ -132,16 +135,19 @@
                             <ul class="list-unstyled">
                                 <li><a href="{{ url('/') }}">Home</a></li>
                                 <li><a href="{{ url('/features') }}">Features</a></li>
-                                <li><a href="{{ url('/pricing') }}">Pricing</a></li>
-                                <li><a href="{{ url('/blog') }}">Blog</a></li>
+                                <!-- <li><a href="{{ url('/pricing') }}">Pricing</a></li> -->
+                                <!-- <li><a href="{{ url('/blog') }}">Blog</a></li> -->
                             </ul>
                         </div>
                         <div class="col-md-4 mb-4 mb-md-0">
                             <h3>Links</h3>
                             <ul class="list-unstyled">
-                                <li><a href="{{ url('/') }}">About</a></li>
+                                <!-- <li><a href="{{ url('/') }}">About</a></li> -->
                                 @guest
                                 <li><a href="{{ route('login') }}">Login</a></li>
+                                @if (Route::has('register'))
+                                    <li><a href="{{ route('register') }}" >Client Registration</a></li>
+                                @endif
                                 @endguest
                             </ul>
                         </div>

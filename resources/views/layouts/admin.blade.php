@@ -50,34 +50,35 @@
                <i class="fas fa-fw fa-cubes"></i>
                <span>Projects</span></a>
             </li>
-               <li class="nav-item {{ (request()->is('categories*')) ? 'active' : '' }}">
-               <a class="nav-link" href="{{ url('/categories') }}">
-               <i class="fas fa-fw fa-th-large"></i>
-               <span>Categories</span></a>
-            </li>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
                <a class="nav-link" href="{{ url('/users') }}">
                <i class="fas fa-fw fa-users"></i>
                <span>Users</span></a>
             </li>
+            <li class="nav-item {{ (request()->is('contacts*')) ? 'active' : '' }}">
+               <a class="nav-link" href="{{ url('/contacts') }}">
+               <i class="fas fa-fw fa-users"></i>
+               <span>Contacts</span></a>
+            </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 Addons
             </div>
-            <li class="nav-item {{ (request()->is('roles*') || request()->is('permissions*') || request()->is('contacts*') || request()->is('configurations*')) ? 'active' : '' }}">
-               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="{{ (request()->is('roles*') || request()->is('permissions*') || request()->is('contacts*') || request()->is('configurations*')) ? 'true' : 'false' }}" aria-controls="collapsePages">
+            <li class="nav-item {{ (request()->is('roles*') || request()->is('permissions*') || request()->is('configurations*') || request()->is('categories*')) ? 'active' : '' }}">
+               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="{{ (request()->is('roles*') || request()->is('permissions*') || request()->is('configurations*') || request()->is('categories*')) ? 'true' : 'false' }}" aria-controls="collapsePages">
                <i class="fas fa-fw fa-wrench"></i>
                <span>Utilities</span>
                </a>
-               <div id="collapsePages" class="collapse {{ (request()->is('roles*') || request()->is('permissions*') || request()->is('contacts*') || request()->is('configurations*')) ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
+               <div id="collapsePages" class="collapse {{ (request()->is('roles*') || request()->is('permissions*') || request()->is('configurations*') || request()->is('categories*')) ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
                   <div class="bg-white py-2 collapse-inner rounded">
+                  <h6 class="collapse-header">Projects:</h6>
+                     <a class="collapse-item {{ (request()->is('categories*')) ? 'active' : '' }}" href="{{ url('/categories') }}">Categories</a>
                      <h6 class="collapse-header">Users:</h6>
                      <a class="collapse-item {{ (request()->is('roles*')) ? 'active' : '' }}" href="{{ url('/roles') }}">Roles</a>
                      <a class="collapse-item {{ (request()->is('permissions*')) ? 'active' : '' }}" href="{{ url('/permissions') }}">Permissions</a>
                      <div class="collapse-divider"></div>
                      <h6 class="collapse-header">Other:</h6>
-                     <a class="collapse-item {{ (request()->is('contacts*')) ? 'active' : '' }}" href="{{ url('/contacts') }}">Contacts</a>
                      <a class="collapse-item {{ (request()->is('configurations*')) ? 'active' : '' }}" href="{{ url('/configurations') }}">Configurations</a>
                   </div>
                </div>
