@@ -78,8 +78,8 @@
             <thead>
                <tr>
                   <th>ID</th>
-                  <th>Image</th>
                   <th>Name</th>
+                  <th>Type</th>
                   <th>Price</th>
                   <th>Status</th>
                   <?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
@@ -94,14 +94,8 @@
                @foreach($projects as $project)
                <tr>
                   <td>{{$project->id}}</td>
-                  <td>
-                     @empty($project->project_image)
-                        <img src="{{ '/demo_images/def.jpg' }}" width="48" height="48">
-                     @else
-                        <img src="{{ '/storage/project_images/'.$project->project_image }}" width="48" height="48">
-                     @endempty
-                  </td>
                   <td>{{$project->project_name}}</td>
+                  <td><?php echo ($project->project_status == '1') ? 'Fixed Price' :  'Hourly Price'; ?></td>
                   <td>{{$project->project_price}} &#8377;</td>
                   <td><?php echo ($project->project_status == '1') ? '<i class="fas fa-toggle-on"></i> In-Progress' : '<i class="fas fa-toggle-off"></i> Completed'; ?></td>
                   <?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>

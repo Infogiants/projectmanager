@@ -61,44 +61,25 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('project_image');
         $validator = Validator::make($request->all(), [
             'project_category_id'=>'required|string|max:255'.Rule::in(Category::where('user_id', Auth::user()->id)->pluck('id')->toArray()),
             'project_name'=>'required|string|max:255',
             'project_price'=>'required|numeric|min:0',
+            'project_type'=>'required|string|max:255|'.Rule::in($this->status),
             'project_status'=>'required|string|max:255|'.Rule::in($this->status),
             'project_description' => 'required|string|max:255',
             'client_user_id' => 'required|'.Rule::in(User::where('id', '<>', Auth::user()->id)->pluck('id')->toArray())
         ]);
         
-        if (!empty($file)) {
-            $validator = Validator::make($request->all(), [
-                'project_image' => 'required|image|max:2000',
-                'project_category_id'=>'required|string|max:255'.Rule::in(Category::where('user_id', Auth::user()->id)->pluck('id')->toArray()),
-                'project_name'=>'required|string|max:255',
-                'project_price'=>'required|numeric|min:0',
-                'project_status'=>'required|string|max:255|'.Rule::in($this->status),
-                'project_description' => 'required|string|max:255',
-                'client_user_id' => 'required|'.Rule::in(User::where('id', '<>', Auth::user()->id)->pluck('id')->toArray())
-            ]);
-        }
-        
         if ($validator->fails()) {
             return redirect('projects/create')->withErrors($validator)->withInput();
         }
-
-        if (!empty($file)) {
-            $request->file('project_image')->store('public/project_images');
-            $fileName = $request->file('project_image')->hashName();    
-        } else {
-            $fileName = '';
-        }
-
+        
         $project = new Project([
             'user_id' => Auth::user()->id,
-            'project_image' => $fileName,
             'project_category_id' => $request->get('project_category_id'),
             'project_name' => $request->get('project_name'),
+            'project_type' => $request->get('project_type'),
             'project_price' => $request->get('project_price'),
             'project_description' => $request->get('project_description') ?? '',
             'project_status' => $request->get('project_status'),
@@ -164,44 +145,23 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         $project = Project::find($id);
-        $file = $request->file('project_image');
         $validator = Validator::make($request->all(), [
             'project_category_id'=>'required|string|max:255|'.Rule::in(Category::where('user_id', Auth::user()->id)->pluck('id')->toArray()),
             'project_name'=>'required|string|max:255',
+            'project_type'=>'required|string|max:255|'.Rule::in($this->status),
             'project_price'=>'required|numeric|min:0',
             'project_status'=>'required|string|max:255|'.Rule::in($this->status),
             'project_description' => 'required|string|max:255',
             'client_user_id' => 'required|'.Rule::in(User::where('id', '<>', Auth::user()->id)->pluck('id')->toArray())
         ]);
 
-        if (!empty($file)) {
-            $validator = Validator::make($request->all(), [
-                'project_image' => 'required|image|max:2000',
-                'project_category_id'=>'required|string|max:255|'.Rule::in(Category::where('user_id', Auth::user()->id)->pluck('id')->toArray()),
-                'project_name'=>'required|string|max:255',
-                'project_price'=>'required|numeric|min:0',
-                'project_status'=>'required|string|max:255|'.Rule::in($this->status),
-                'project_description' => 'required|string|max:255',
-                'client_user_id' => 'required|'.Rule::in(User::where('id', '<>', Auth::user()->id)->pluck('id')->toArray())
-            ]);
-        }
-
         if ($validator->fails()) {
             return redirect('projects/'.$id.'/edit')->withErrors($validator)->withInput();
         }
 
-        if (!empty($file)) {
-            //Delete old file
-            Storage::delete('/public/project_images/' . $project->project_image);
-            $request->file('project_image')->store('public/project_images');
-            $fileName = $request->file('project_image')->hashName();    
-        } else {
-            $fileName = $project->project_image;
-        }
-
-        $project->project_image =  $fileName;
         $project->project_category_id = $request->get('project_category_id');
         $project->project_name = $request->get('project_name');
+        $project->project_type = $request->get('project_type');
         $project->project_price = $request->get('project_price');
         $project->project_description = $request->get('project_description');
         $project->project_status = $request->get('project_status');
@@ -222,25 +182,10 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if ($project) {
-            Storage::delete('/public/project_images/' . $project->project_image);
             $project->delete();
             return redirect('/projects')->with('success', 'Project deleted!');  
         } else {
             return redirect('/projects')->with('errors', 'Invalid Project to delete!');
         }
-    }
-
-    /**
-     * Store project documents.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function documents(Request $request)
-    {   
-        print_r($request->all());
-        die;
-        $files = $request->file('file');
-        dd($files);
     }
 }

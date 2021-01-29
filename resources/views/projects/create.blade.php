@@ -30,17 +30,20 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="project_status">Project Status: </label></br>
-                    <select class="form-control {{ $errors->has('project_status') ? 'is-invalid' : '' }}" id="project_status" name="project_status">
-                        <option value="1">In-Progress</option>
-                        <option value="0">Completed</option>
+                    <label for="project_type">Project Type: </label></br>
+                    <select class="form-control {{ $errors->has('project_type') ? 'is-invalid' : '' }}" id="project_type" name="project_type">
+                        <option value="1">Fixed Price</option>
+                        <option value="0">Hourly Price</option>
                     </select>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="project_image">Project Image:</label>
-                    <input type="file" class="form-control-file border {{ $errors->has('project_image') ? 'is-invalid' : '' }}" name="project_image" value="{{ old('project_image') }}" />
+                    <label for="project_status">Project Status: </label></br>
+                    <select class="form-control {{ $errors->has('project_status') ? 'is-invalid' : '' }}" id="project_status" name="project_status">
+                        <option value="1">In-Progress</option>
+                        <option value="0">Completed</option>
+                    </select>
                 </div>
             </div>
         </div>

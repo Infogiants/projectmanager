@@ -8,20 +8,7 @@
 <a href="{{ url()->previous() }}" style="text-decoration:none;">&#8592; Go Back</a>
 </div>
 <div class="row">
-   <div class="col-lg-4">
-      <div class="card shadow mb-4">
-         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Profile Picture</h6>
-         </div>
-         <div class="card-body text-center">
-            <!-- Profile picture image-->
-            <img class="img-account-profile rounded-circle mb-2" src="{{ '/demo_images/profile-1.png' }}" width="100" height="100">
-            <!-- Profile picture help block-->
-            <div class="font-italic text-muted mb-4">{{ $user->name }} - {{ $user->email }}</div>
-         </div>
-      </div>
-   </div>
-   <div class="col-lg-8">
+   <div class="col-lg-12">
       <div class="card shadow mb-4">
          <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Account Details</h6>
@@ -34,7 +21,10 @@
             <label class="mb-1" for="inputUsername"><strong>Email:</strong> {{ $user->email }}</label>
         </div>
         <div class="form-group">
-            <label class="mb-1" for="inputUsername"><strong>Created at:</strong> {{ $user->created_at }}</label>
+            <label class="mb-1" for="inputUsername"><strong>Email Verified Date:</strong> {{  \Carbon\Carbon::parse($user->email_verified_at)->format('F j, Y - h:i a') }}</label>
+        </div>
+        <div class="form-group">
+            <label class="mb-1" for="inputUsername"><strong>Created Date:</strong> {{  \Carbon\Carbon::parse($user->created_at)->format('F j, Y - h:i a') }}</label>
         </div>
          </div>
       </div>

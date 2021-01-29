@@ -14,8 +14,17 @@ class CreateMileStonesTable extends Migration
     public function up()
     {
         Schema::create('mile_stones', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('project_id');
+            $table->string('title');
+            $table->string('description');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
+            //FOREIGN KEY CONSTRAINTS
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 

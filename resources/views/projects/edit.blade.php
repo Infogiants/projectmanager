@@ -29,30 +29,20 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
+                    <label for="project_type">Project Type: </label></br>
+                    <select class="form-control {{ $errors->has('project_type') ? 'is-invalid' : '' }}" id="project_type" name="project_type" value="{{ $project->project_type }}">
+                        <option value="1" {{ $project->project_type == '1' ? 'selected' : '' }}>Fixed Price</option>
+                        <option value="0" {{ $project->project_type == '0' ? 'selected' : '' }}>Hourly Price</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+            <div class="form-group">
                     <label for="project_status">Project Status: </label></br>
                     <select class="form-control {{ $errors->has('project_status') ? 'is-invalid' : '' }}" id="project_status" name="project_status" value="{{ $project->project_status }}">
                         <option value="1" {{ $project->project_status == '1' ? 'selected' : '' }}>In-Progress</option>
                         <option value="0" {{ $project->project_status == '0' ? 'selected' : '' }}>Completed</option>
                     </select>
-                </div>
-            </div>
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="project_image">Project Image:</label>
-                            <input type="file" class="form-control-file border {{ $errors->has('project_image') ? 'is-invalid' : '' }}" name="project_image" value="{{ $project->project_image }}" />
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group text-center">
-                            @empty($project->project_image)
-                                <img src="{{ '/demo_images/def.jpg' }}" width="100" height="100">
-                            @else
-                            <img src="{{ '/storage/project_images/'.$project->project_image }}" width="100" height="100">
-                            @endempty
-                        </div>
-                    </div> 
                 </div>
             </div>
         </div>

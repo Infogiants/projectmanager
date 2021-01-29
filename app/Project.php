@@ -8,9 +8,9 @@ class Project extends Model
 {
     protected $fillable = [
         'user_id',
-        'project_image',
         'project_category_id',
         'project_name',
+        'project_type',
         'project_price',
         'project_start_date',
         'project_end_date',
