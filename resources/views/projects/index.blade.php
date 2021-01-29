@@ -8,7 +8,7 @@
 <p class="mb-4">Your projects section, you can manage your project from this page.</p>
 <div class="row">
    <div class="col-lg-2">
-         <div class="card mb-4 py-3 border-left-primary">
+         <div class="card mb-4 border-left-primary">
             <div class="card-body">
                <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
@@ -23,7 +23,7 @@
          </div>
    </div>
    <div class="col-lg-2">
-         <div class="card mb-4 py-3 border-left-primary">
+         <div class="card mb-4 border-left-primary">
             <div class="card-body">
                <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
@@ -38,7 +38,7 @@
          </div>
    </div>
    <div class="col-lg-2">
-         <div class="card mb-4 py-3 border-left-primary">
+         <div class="card mb-4 border-left-primary">
             <div class="card-body">
                <div class="row no-gutters align-items-center">
                   <div class="col mr-2">

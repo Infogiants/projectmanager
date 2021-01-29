@@ -18,3 +18,15 @@ td.order_id {
     color: #fff;
     margin-top: 2px;
 }
+
+.dropzone {
+    border: 2px dashed #0087F7 !important;
+    border-radius: 5px !important;
+    background: white !important;
+    color: #858796 !important;
+    min-height: 264px !important; 
+}
+
+.dropzone .dz-message {
+    margin: 6em 0 !important;
+}

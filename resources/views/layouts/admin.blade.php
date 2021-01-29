@@ -333,11 +333,14 @@
    <!-- Custom scripts for all pages-->
    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-   <?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
-   <!-- Page level plugins -->
-   <script src="{{ asset('js/chart.js/Chart.min.js') }}"></script>
-   <!-- Page level custom scripts -->
-   <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-   <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+   <?php if(
+      (request()->is('home*')) 
+      && in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): 
+   ?>
+      <!-- Page level plugins -->
+      <script src="{{ asset('js/chart.js/Chart.min.js') }}"></script>
+      <!-- Page level custom scripts -->
+      <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
+      <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
    <?php endif; ?>
 </html>
