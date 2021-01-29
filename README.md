@@ -1,68 +1,56 @@
-<p align="center">
-        <img src="https://raw.githubusercontent.com/lpkapil/storemanager/dev/public/demo_images/banner.png">
-</p>
-
 ## About Application
 
-It's Store manager web application based on Software as service model. Multiple online stores can be created for sellers as a service, REST API exposed for creating store mobile application to sell goods & a dedicated admin panel available for sellers to manage store, It's Developed using Laravel v7.15.0. 
+It's project manager web application for manging projects, clients, invoices, tasks etc for individual to small business. It's Developed using Laravel v7.15.0. 
 
 ###### Completed
 
-- User/Seller Login/Registration Module 
-- Customer/Buyer Login/Registration
-- Contacts Management Module
-- User Management Module
-- Role Management Module
-- Role Permision Management Module
-- Store Mangement Module
-- Category Mangement Module
-- Product Management Module
-- Order Mangement Module
-- Frontend purchase flow
+- User/Client Login Module 
+- Admin Contacts Management Module
+- Admin User Management Module
+- Admin Role Management Module
+- Admin Role Permision Management Module
+- Admin Store/Business Mangement Module
+- Project Category Mangement Module
+- Project Management Module
 
 ###### In-Progress
 
-- Sales Report Management Module
+- Bug fixing in existing features and testing
 
 ###### To-do
 
-- Enhancement in User Module and Order Module For Customer Details Mapping
-- Storewise Customers Management Module
+- Project Tasks Management Module - To-do 
+- Project Milestones Management Module - To-do
 - Customer Notification Management Module
-- Integration token management module for REST API Access
-- REST API(s) for all modules for mobile apps
-- Payment Methods Mangement Module
 - Announcement/Blog/News Management Module
 - Support and Contact Module
-- MyStore Contact Page Functionality
-- POC of googlepay payment method for sellers online payment method in store
 
 ###### Summary of completed modules 
 
-Three differenet roles Admin/User/Customer will automatically added in system and both Admin and User have differnet dashboard according to assiged permissions in roles. On new user registration a confirmation email will be sent to the registered email address, Account will activate only when user will click on activation link sent in email address.
+Two differenet roles Admin/User will automatically added in system and both Admin and User have differnet dashboard according to assiged permissions in roles. Admin can add client users by email and assign them to projects.
 
 ## Installation Procedure
 
 Pull Latest code: 
 
-`https://github.com/lpkapil/storemanager.git`
+`https://github.com/lpkapil/projectmanager.git`
 
 - Create Virtual Host & Host Entry in apache configuration and host file and restart apache server
 
 ```
 <VirtualHost *:80>
         ServerAdmin webmaster@example.com
-        ServerName storemanager.com
-        ServerAlias storemanager.com
-        DocumentRoot /var/www/html/storemanager/public/
-        <Directory /var/www/html/storemanager>
+        ServerName projectmanager.com
+        ServerAlias projectmanager.com
+        DocumentRoot /var/www/html/projectmanager/public/
+        <Directory /var/www/html/projectmanager>
                 AllowOverride all
                 Require all granted
         </Directory>
 </VirtualHost>
 ```
 
-`127.0.0.1 storemanager.com`
+`127.0.0.1 projectmanager.com`
 
 `service apache2 restart`
 
@@ -76,13 +64,15 @@ Pull Latest code:
 
 `rm -rf storage`
 
+`cd ..`
+
 `php artisan storage:link`
 
 - Storage:link command needs to be run first time, and it's used when application using media upload feature, it created symlink of internal image folder to public folder, so images can access via url from internal app stoage folder.
 
 - Open application using URL
 
-`http://storemanager.com`
+`http://projectmanager.com`
 
 ## Login Details
 
@@ -96,14 +86,9 @@ Password: admin
 Username: user@example.com
 Password: user
 
-#### Customer ####
-
-Username: customer@example.com
-Password: customer
-
 ## Demo Screens
 
-![Demo Screens](https://github.com/lpkapil/storemanager/blob/dev/public/demo_images/demo.gif?raw=true)
+Coming soon...
 
 ## Donate and Support
 
