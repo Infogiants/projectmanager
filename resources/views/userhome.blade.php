@@ -55,6 +55,9 @@
                   <div class="mb-2 text-gray-800">
                      <strong>Our Address:</strong> {{ $store->store_address }}
                   </div>
+                  <div class="mb-2 text-gray-800">
+                     <strong>Status:</strong> <?php echo $store->store_status == 1 ? 'We are working and operational today.' : $store->store_closed_message; ?>
+                  </div>
                </div>
                @endempty
                <div class="col-auto">
