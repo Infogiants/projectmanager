@@ -97,9 +97,17 @@
                   <td>{{$project->project_name}}</td>
                   <td><?php echo ($project->project_status == '1') ? 'Fixed Price' :  'Hourly Price'; ?></td>
                   <td>{{$project->project_price}} &#8377;</td>
-                  <td><?php echo ($project->project_status == '1') ? '<i class="fas fa-toggle-on"></i> In-Progress' : '<i class="fas fa-toggle-off"></i> Completed'; ?></td>
+                  <td>
+                  <?php if($project->project_status == 1): ?>
+                                 <label class="btn btn-info active">In-Progress</label>
+                              <?php endif; ?>
+
+                              <?php if($project->project_status == 0): ?>
+                                 <label class="btn btn-success">Completed</label>
+                              <?php endif; ?>
+                 </td>
                   <?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
-                     <td><a href="{{ route('users.show',$project->client_user_id)}}">{{ $project->client_user_id }}<a/></td>
+                     <td><a href="{{ route('users.show',$project->client_user_id)}}">{{ $project->client()->first()->toArray()['name'] }}</a></td>
                      <td>
                         <a href="{{ route('projects.show',$project->id)}}" class="btn btn-primary">Manage</a>
                      </td>

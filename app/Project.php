@@ -21,7 +21,16 @@ class Project extends Model
 
     public function category()
     {
-        return $this->hasOne('App\Category', 'project_category_id');
+        return $this->hasOne('App\Category', 'id', 'project_category_id');
     }
-    
+
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'user_id');
+    }
+
+    public function client()
+    {
+        return $this->hasOne('App\User', 'id', 'client_user_id');
+    }
 }

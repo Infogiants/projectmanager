@@ -19,6 +19,7 @@ class CreateTasksTable extends Migration
             $table->unsignedInteger('project_id');
             $table->string('title');
             $table->string('description');
+            $table->tinyInteger('status');
             $table->timestamps();
             //FOREIGN KEY CONSTRAINTS
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

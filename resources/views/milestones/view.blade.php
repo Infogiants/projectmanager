@@ -1,8 +1,8 @@
 @extends('base')
-@section('title', 'Admin - Add Document')
+@section('title', 'Admin - Mangage Milestone')
 @section('main')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <h1 class="h3 mb-0 text-gray-800">Add Task</h1>
+   <h1 class="h3 mb-0 text-gray-800">Mangage Milestone</h1>
 </div>
 <div class="mb-4">
    <a href="{{ url()->previous() }}" style="text-decoration:none;">&#8592; Go Back</a>

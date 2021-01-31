@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\Task;
 use App\Category;
 use App\User;
 use Illuminate\Http\Request;
@@ -101,7 +102,8 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if ($project) {
-            return view('projects.view', compact('project'));   
+            $tasks = Task::where('project_id', $project->id)->orderByDesc('id')->paginate(4,['*'],'taskpage');
+            return view('projects.view', compact('project', 'tasks'));   
         } else {
             return redirect('/projects')->with('errors', 'Invalid project to view!');
         }

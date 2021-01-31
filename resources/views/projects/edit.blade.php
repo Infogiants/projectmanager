@@ -5,7 +5,9 @@
 @section('main')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800">Edit Project: {{ $project->id }}</h1>
-  
+</div>
+<div class="mb-4">
+   <a href="{{ url('projects') }}" style="text-decoration:none;">&#8592; Go Back</a>
 </div>
 <div class="card shadow mb-4">
 <div class="card-body">
