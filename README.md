@@ -12,15 +12,17 @@ It's project manager web application for manging projects, clients, invoices, ta
 - Admin Store/Business Mangement Module
 - Project Category Mangement Module
 - Project Management Module
+- Project Tasks Management Module
+- Task Comments Management Module
 
 ###### In-Progress
 
 - Bug fixing in existing features and testing
+- Project Milestones Management Module - 50%
+- Project and Task Document Management Module - 50%
 
 ###### To-do
 
-- Project Tasks Management Module - To-do 
-- Project Milestones Management Module - To-do
 - Customer Notification Management Module
 - Announcement/Blog/News Management Module
 - Support and Contact Module
