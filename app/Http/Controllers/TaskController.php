@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\Comment;
 use App\User;
 use App\Project;
 use Illuminate\Http\Request;
@@ -85,7 +86,8 @@ class TaskController extends Controller
     {   
         $task = Task::find($task->id);
         if ($task) {
-            return view('tasks.view', compact('task'));   
+            $comments = Comment::where('task_id', $task->id)->orderBy('id', 'asc')->paginate(10,['*'],'commentpage');
+            return view('tasks.view', compact('task', 'comments'));   
         } else {
             return redirect('/projects')->with('errors', 'Invalid task to view!');
         }

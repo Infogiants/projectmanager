@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('projects', 'ProjectController');
     Route::resource('documents', 'DocumentController');
     Route::resource('tasks', 'TaskController');
+    Route::resource('comments', 'CommentController');
     Route::resource('milestones', 'MileStoneController');
 });
 

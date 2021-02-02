@@ -264,11 +264,9 @@
                                  </form>
                               </td>
                            <?php else: ?>
-                              <td>
+                              <td coldspan="3">
                                  <a href="{{ route('tasks.show',$task->id)}}" class="btn btn-primary">Manage Details</a>
                               </td>
-                              <td></td>
-                              <td></td>
                            <?php endif;?>
                         </tr>
                         @endforeach

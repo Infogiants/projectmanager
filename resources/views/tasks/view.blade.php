@@ -57,13 +57,29 @@
             <h6 class="m-0 font-weight-bold text-primary">Comments</h6>
          </div>
          <div class="card-body">
-            <form method="post" action="{{ route('tasks.store') }}">
+            @foreach($comments as $comment)
+               <div class="card mb-4">
+                  <div class="card-body">
+                     {{ $comment->description }}
+                  </div>
+                  <div class="card-footer">
+                     <small>
+                        Added By: <?php echo $comment->user()->first()->toArray()['name']; ?> |  {{  \Carbon\Carbon::parse($comment->created_at)->format('F j, Y - h:i:a ') }}
+                     </small>
+                  </div>
+               </div>
+            @endforeach    
+
+            {{ $comments->appends(request()->except('commentpage'))->links() }}     
+
+            <form method="post" action="{{ route('comments.store') }}">
                @csrf
                <div class="form-group">
                   <label for="description">Comment:</label>
                   <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" rows="5">{{ old('description') }}</textarea>
                </div>
                <input type="hidden" name="task_id" value="<?php echo $task->id; ?>" />
+               <input type="hidden" name="project_id" value="<?php echo $task->project()->first()->toArray()['id']; ?>" />
                <button type="submit" class="btn btn-primary float-right mb-4">Add</button>
             </form>
          </div>
