@@ -18,7 +18,6 @@ It's project manager web application for manging projects, clients, invoices, ta
 ###### In-Progress
 
 - Bug fixing in existing features and testing
-- Project Milestones Management Module - 50%
 - Project and Task Document Management Module - 50%
 
 ###### To-do

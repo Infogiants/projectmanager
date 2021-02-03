@@ -53,6 +53,29 @@
 <div class="row">
    <div class="col-lg-12">
       <div class="card shadow mb-4">
+         <!-- Card Header - Accordion -->
+         <a href="#task_documents" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-primary">Task Documents (To-do)</h6>
+         </a>
+         <!-- Card Content - Collapse -->
+         <div class="collapse show" id="task_documents" style="">
+            <div class="card-body">
+               <div>
+                  <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#uploaddocument" aria-expanded="false" aria-controls="uploaddocument">
+                  <i class="fa fa-upload" aria-hidden="true"></i> Upload Document
+                  </button>
+                  <div class="collapse mb-4" id="uploaddocument">
+                     Upload Document Form
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="row">
+   <div class="col-lg-12">
+      <div class="card shadow mb-4">
          <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Comments</h6>
          </div>

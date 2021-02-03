@@ -36,10 +36,16 @@ class ProjectController extends Controller
     {
         if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())):
             $projects = Project::orderByDesc('id')->paginate(4);
+            $all = Project::all()->count();
+            $inprogress = Project::where('project_status', '1')->count();
+            $completed = Project::where('project_status', '0')->count();
         else:
             $projects = Project::where('client_user_id', Auth::user()->id)->orderByDesc('id')->paginate(4);
+            $all = Project::where('client_user_id', Auth::user()->id)->count();
+            $inprogress = Project::where([['client_user_id', '=', Auth::user()->id],['project_status', '=', '1']])->count();
+            $completed = Project::where([['client_user_id', '=', Auth::user()->id],['project_status', '=', '0']])->count();
         endif;
-        return view('projects.index', compact('projects'));
+        return view('projects.index', compact('projects', 'all', 'inprogress', 'completed'));
     }
 
     /**
@@ -103,7 +109,11 @@ class ProjectController extends Controller
         $project = Project::find($id);
         if ($project) {
             $tasks = Task::where('project_id', $project->id)->orderByDesc('id')->paginate(4,['*'],'taskpage');
-            return view('projects.view', compact('project', 'tasks'));   
+            $all = Task::where('project_id', $project->id)->count();
+            $todo = Task::where([['project_id', '=', $project->id],['status', '=', '0']])->count();
+            $inprogress = Task::where([['project_id', '=', $project->id],['status', '=', '1']])->count();
+            $completed = Task::where([['project_id', '=', $project->id],['status', '=', '2']])->count();
+            return view('projects.view', compact('project', 'tasks', 'all', 'todo', 'inprogress', 'completed'));   
         } else {
             return redirect('/projects')->with('errors', 'Invalid project to view!');
         }

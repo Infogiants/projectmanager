@@ -3,7 +3,7 @@
 @section('main')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <h1 class="h3 mb-0 text-gray-800">Projects</h1>
+   <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-cubes text-gray-300"></i> Projects</h1>
 </div>
 <p class="mb-4">Your projects section, you can manage your project from this page.</p>
 <div class="row">
@@ -13,7 +13,7 @@
                <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">All</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $all }}</div>
                   </div>
                   <div class="col-auto">
                      <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -28,7 +28,7 @@
                <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">In-Progress</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $inprogress }}</div>
                   </div>
                   <div class="col-auto">
                      <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -43,7 +43,7 @@
                <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Completed</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $completed }}</div>
                   </div>
                   <div class="col-auto">
                      <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>

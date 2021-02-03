@@ -2,7 +2,7 @@
 @section('title', 'Admin - View User')
 @section('main')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <h1 class="h3 mb-0 text-gray-800">{{ $project->project_name }} <small>(<?php echo ($project->project_status == '1') ? 'In-Progress' : 'Completed'; ?>)</small></h1>
+   <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-cubes text-gray-300"></i> {{ $project->project_name }} <small>(<?php echo ($project->project_status == '1') ? 'In-Progress' : 'Completed'; ?>)</small></h1>
 </div>
 <div class="mb-4">
    <a href="{{ url('projects') }}" style="text-decoration:none;">&#8592; Go Back</a>
@@ -69,7 +69,7 @@
                   <div class="row no-gutters align-items-center">
                      <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">All Tasks</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $all }}</div>
                      </div>
                      <div class="col-auto">
                         <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -79,42 +79,12 @@
             </div>
          </div>
          <div class="col-lg-6">
-            <div class="card mb-4 border-left-primary">
+            <div class="card mb-4 border-left-secondary">
                <div class="card-body">
                   <div class="row no-gutters align-items-center">
                      <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Documents</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
-                     </div>
-                     <div class="col-auto">
-                        <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-lg-6">
-            <div class="card mb-4 border-left-warning">
-               <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">In-Progress</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
-                     </div>
-                     <div class="col-auto">
-                        <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-lg-6">
-            <div class="card mb-4 border-left-primary">
-               <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Milestones</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">To-do Tasks</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $todo }}</div>
                      </div>
                      <div class="col-auto">
                         <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -128,8 +98,8 @@
                <div class="card-body">
                   <div class="row no-gutters align-items-center">
                      <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Completed</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Completed Tasks</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $completed }}</div>
                      </div>
                      <div class="col-auto">
                         <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -139,12 +109,12 @@
             </div>
          </div>
          <div class="col-lg-6">
-            <div class="card mb-4 border-left-primary">
+            <div class="card mb-4 border-left-warning">
                <div class="card-body">
                   <div class="row no-gutters align-items-center">
                      <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Invoices (To-do)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">In-Progress Tasks</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $inprogress }}</div>
                      </div>
                      <div class="col-auto">
                         <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -153,7 +123,21 @@
                </div>
             </div>
          </div>
-
+         <div class="col-lg-12">
+            <div class="card mb-4 border-left-primary">
+               <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                     <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Project Documents</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                     </div>
+                     <div class="col-auto">
+                        <i class="fas fa-file fa-2x text-gray-300"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
    </div>
 
@@ -273,69 +257,6 @@
                      </tbody>
                   </table>
                   {{ $tasks->appends(request()->except('taskpage'))->links() }}
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<div class="row">
-   <div class="col-lg-12">
-      <div class="card shadow mb-4">
-         <!-- Card Header - Accordion -->
-         <a href="#project_milestones" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-            <h6 class="m-0 font-weight-bold text-primary">Project MileStones (To-do)</h6>
-         </a>
-         <!-- Card Content - Collapse -->
-         <div class="collapse show" id="project_milestones" style="">
-            <div class="card-body">
-               <div>
-                  <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#addmilestoneform" aria-expanded="false" aria-controls="addmilestoneform">
-                  <i class="fa fa-plus" aria-hidden="true"></i> Create Milestone
-                  </button>
-                  <div class="collapse" id="addmilestoneform">
-                        <div>
-                           @if(session()->get('success'))
-                           <div class="alert alert-success">
-                                 {{ session()->get('success') }}
-                           </div>
-                           @endif
-
-                           @if(session()->get('errors'))
-                           <div class="alert alert-danger">
-                                 @foreach ($errors->all() as $error)
-                                    {{ $error }}<br/>
-                                 @endforeach
-                           </div>
-                           @endif
-                        </div>
-                        <form method="post" action="{{ route('milestones.store') }}">
-                           @csrf
-                           <div class="form-group">
-                                 <label for="title">Title:</label>
-                                 <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title" value="{{ old('title') }}" />
-                           </div>
-                           <div class="form-group">
-                                 <label for="description">Description:</label>
-                                 <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" rows="5">{{ old('description') }}</textarea>
-                           </div>
-                           <div class="row">
-                              <div class="col">
-                                 <div class="form-group">
-                                    <label for="start_date">Start Date:</label>
-                                    <input type="date" class="form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}" name="start_date" value="{{ old('start_date') }}" />
-                                 </div>
-                              </div>
-                              <div class="col">
-                                 <div class="form-group">
-                                    <label for="end_date">End Date:</label>
-                                    <input type="date" class="form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}" name="end_date" value="{{ old('end_date') }}" />
-                                 </div>
-                              </div>
-                           </div>
-                           <button type="submit" class="btn btn-primary float-right mb-4">Save</button>
-                        </form>
-                  </div>
                </div>
             </div>
          </div>
