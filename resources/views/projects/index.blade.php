@@ -91,7 +91,7 @@
                </tr>
             </thead>
             <tbody>
-               @foreach($projects as $project)
+               @forelse($projects as $project)
                <tr>
                   <td>{{$project->id}}</td>
                   <td>{{$project->project_name}}</td>
@@ -127,7 +127,15 @@
                      </td>
                   <?php endif; ?>
                </tr>
-               @endforeach
+               @empty
+               <tr>
+               <?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
+                  <td colspan="7" class="text-center">No projects found</td>
+               <?php else: ?>
+                  <td colspan="6" class="text-center">No projects found</td>
+               <?php endif; ?>
+               </tr>
+               @endforelse
             </tbody>
          </table>
          {{ $projects->links() }}

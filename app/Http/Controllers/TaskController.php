@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\Document;
 use App\Comment;
 use App\User;
 use App\Project;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Storage;
 
 class TaskController extends Controller
 {
@@ -87,7 +89,10 @@ class TaskController extends Controller
         $task = Task::find($task->id);
         if ($task) {
             $comments = Comment::where('task_id', $task->id)->orderBy('id', 'asc')->paginate(10,['*'],'commentpage');
-            return view('tasks.view', compact('task', 'comments'));   
+            $commentscount = Comment::where('task_id', $task->id)->count();
+            $documents = Document::where('task_id', $task->id)->orderByDesc('id')->paginate(4,['*'],'documentpage');
+            $documentscount = Document::where('task_id', $task->id)->count();
+            return view('tasks.view', compact('task', 'comments', 'documents', 'documentscount', 'commentscount'));   
         } else {
             return redirect('/projects')->with('errors', 'Invalid task to view!');
         }
@@ -147,6 +152,11 @@ class TaskController extends Controller
     {
         $task = Task::find($task->id);
         $projectId = $task->project_id;
+        $documents = Document::where('task_id', $task->id)->get();
+        foreach($documents as $document) {
+            Storage::delete('/public/documents/' . $document->url);
+            $document->delete();
+        }
         if ($task) {
             $task->delete();
             return redirect('/projects/'.$projectId)->with('success', 'Task deleted!'); 

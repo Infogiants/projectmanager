@@ -41,7 +41,7 @@
                </tr>
             </thead>
             <tbody>
-               @foreach($stores as $store)
+               @forelse($stores as $store)
                <tr>
                   <td>{{$store->id}}</td>
                   <td>
@@ -66,7 +66,11 @@
                      <a href="{{ route('stores.edit',$store->id)}}" class="btn btn-primary">Edit</a>
                   </td>
                </tr>
-               @endforeach
+               @empty
+               <tr>
+                  <td colspan="8" class="text-center">No store found</td>
+               </tr>
+               @endforelse
             </tbody>
          </table>
          {{ $stores->links() }}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use App\Task;
+use App\Document;
 use App\Category;
 use App\User;
 use Illuminate\Http\Request;
@@ -108,12 +109,16 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if ($project) {
+            //tasks
             $tasks = Task::where('project_id', $project->id)->orderByDesc('id')->paginate(4,['*'],'taskpage');
             $all = Task::where('project_id', $project->id)->count();
             $todo = Task::where([['project_id', '=', $project->id],['status', '=', '0']])->count();
             $inprogress = Task::where([['project_id', '=', $project->id],['status', '=', '1']])->count();
             $completed = Task::where([['project_id', '=', $project->id],['status', '=', '2']])->count();
-            return view('projects.view', compact('project', 'tasks', 'all', 'todo', 'inprogress', 'completed'));   
+            //documents
+            $documents = Document::where([['project_id', '=', $project->id],['task_id', '=', null]])->orderByDesc('id')->paginate(4,['*'],'documentpage');
+            $alldocuments = Document::where([['project_id', '=', $project->id],['task_id', '=', null]])->count();
+            return view('projects.view', compact('project', 'tasks', 'all', 'todo', 'inprogress', 'completed', 'documents', 'alldocuments'));   
         } else {
             return redirect('/projects')->with('errors', 'Invalid project to view!');
         }
@@ -193,6 +198,11 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         $project = Project::find($id);
+        $documents = Document::where('project_id', $project->id)->get();
+        foreach($documents as $document) {
+            Storage::delete('/public/documents/' . $document->url);
+            $document->delete();
+        }
         if ($project) {
             $project->delete();
             return redirect('/projects')->with('success', 'Project deleted!');  

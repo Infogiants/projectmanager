@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use App\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Storage;
 
 class DocumentController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+        $this->middleware('role:admin,user');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,32 +49,40 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {   
-        // print_r($request->all());
-        // die;
-
+        $messages = [
+            'mimes' => 'Supported file format for :attribute are jpeg,png,jpg,pdf,docx,doc',
+        ];
         $file = $request->file('file');
         $validator = Validator::make($request->all(), [
-            'file' => 'required|file|max:5000|mimes:pdf,docx,doc'
-        ]);
+            'file' => 'required|file|max:5000|mimes:jpeg,png,jpg,pdf,docx,doc'
+        ], $messages);
 
         if ($validator->fails()) {
-            return redirect('projects/1')->withErrors($validator);
+            if(empty($request->get('task_id'))) {
+                return redirect('projects/'.$request->get('project_id'))->withErrors($validator);
+            } else {
+                return redirect('tasks/'.$request->get('task_id'))->withErrors($validator);
+            }    
         }
 
         $request->file('file')->store('public/documents');
         $fileName = $request->file('file')->hashName();
-
+        
         Document::create([
-            'project_id' => 1,
-            'task_id' => 0,
+            'project_id' => $request->get('project_id'),
+            'task_id' => $request->get('task_id') ? $request->get('task_id') : null,
             'name' => $file->getClientOriginalName(),
             'type' => $file->getClientMimeType(),
-            'size' => $file->getClientSize(),
+            'size' => $file->getSize(),
             'url' => $fileName,
             'user_id' => Auth::user()->id
         ]);
-
-        return redirect('/projects/1');
+        
+        if(empty($request->get('task_id'))) {
+            return redirect('/projects/'.$request->get('project_id'))->with('success', 'Document uploaded successfully!');;
+        } else {
+            return redirect('/tasks/'.$request->get('task_id'))->with('success', 'Document uploaded successfully!');;
+        }
     }
 
     /**
@@ -106,6 +127,26 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-        //
+        if (($document->user_id == Auth::user()->id)) {
+            $document = Document::find($document->id);
+            $projectId = $document->project_id;
+            $taskId = $document->task_id;
+            if ($document) {
+                Storage::delete('/public/documents/' . $document->url);
+                $document->delete();
+                if(empty($taskId)) {
+                    return redirect('/projects/'.$projectId)->with('success', 'Document deleted successfully!');
+                } else {
+                    return redirect('/tasks/'.$taskId)->with('success', 'Document deleted successfully!');
+                }
+            } else {
+                if(empty($taskId)) {
+                    return redirect('/projects/'.$projectId)->with('errors', 'Invalid Document to delete!');
+                } else {
+                    return redirect('/tasks/'.$taskId)->with('errors', 'Invalid Document to delete!');
+                }
+            }
+        }
+        return redirect('/projects/'.$projectId)->with('errors', 'Unauthorized Action!');
     }
 }
