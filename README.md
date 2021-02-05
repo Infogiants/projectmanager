@@ -1,5 +1,5 @@
 <p align="center">
-        <img src="https://raw.githubusercontent.com/lpkapil/projectmanager/dev/public/demo_images/banner.png">
+        <img src="https://raw.githubusercontent.com/lpkapil/projectmanager/master/public/demo_images/banner.png">
 </p>
 
 ## About Application
