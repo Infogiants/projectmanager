@@ -18,11 +18,11 @@ It's project manager web application for manging projects, clients, invoices, ta
 - Project Management Module
 - Project Tasks Management Module
 - Task Comments Management Module
+- Project and Task Document Management Modul
 
 ###### In-Progress
 
 - Bug fixing in existing features and testing
-- Project and Task Document Management Module - 50%
 
 ###### To-do
 
@@ -86,7 +86,7 @@ Pull Latest code:
 Username: admin@example.com
 Password: admin
 
-#### User/Seller ####
+#### Client ####
 
 Username: user@example.com
 Password: user
