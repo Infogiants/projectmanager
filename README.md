@@ -61,6 +61,8 @@ Pull Latest code:
 
 - Run below command after navigating to application root for refreshing application key & installing database
 
+`composer install`
+
 `php artisan key:generate`
 
 `php artisan migrate:refresh --seed`
