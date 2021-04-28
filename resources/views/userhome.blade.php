@@ -24,7 +24,7 @@
          </div>
       </div>
    </div>
-   
+
    <div class="col-lg-6">
       <div class="card mb-4 py-3 border-left-primary">
          <div class="card-body">
@@ -37,11 +37,11 @@
                <div class="col mr-2">
                   <div class="h5 mb-2 font-weight-bold text-gray-800">
                      @empty($store->store_logo)
-                        <img src="{{ '/demo_images/shop_black.png' }}" width="32" height="32" style="border-radius: 50%;">
+                        <img src="{{ '/demo_images/shop_black.png' }}" width="32" height="32">
                      @else
-                        <img src="{{ '/storage/'.$store->store_logo }}" width="32" height="32" style="border-radius: 50%;">
+                        <img src="{{ '/storage/'.$store->store_logo }}" width="32" height="32">
                      @endempty
-                     {{ $store->store_name }}
+                     &nbsp;&nbsp;{{ $store->store_name }}
                   </div>
                   <div class="mb-2 text-gray-800">
                      <strong>Our Website: </strong> <a href="{{ $store->store_website }}" target="_blank">{{ $store->store_website }}</a>
@@ -67,5 +67,5 @@
          </div>
       </div>
    </div>
-</div>        
+</div>
 @endsection -->
