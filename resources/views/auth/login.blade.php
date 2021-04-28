@@ -23,7 +23,7 @@
             <div class="row justify-content-center">
               <div class="col-md-7 text-center hero-text">
                 <h1 data-aos="fade-up" data-aos-delay="">Login</h1>
-                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Login to Acess Porject Management Dashboard.</p>
+                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Login to Acess Project Management Dashboard.</p>
               </div>
             </div>
           </div>
