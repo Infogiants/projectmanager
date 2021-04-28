@@ -24,7 +24,7 @@
                         <div class="col-lg-7 text-center text-lg-left">
                             <h1 data-aos="fade-right">Complete Project Management</h1>
                             <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Manage all your projects at one place.</p>
-                            <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="{{ route('login') }}" class="btn btn-outline-white">Client Registration</a></p>
+                            <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="{{ route('register') }}" class="btn btn-outline-white">Client Registration</a></p>
                         </div>
                         <div class="col-lg-5 iphone-wrap">
                             <img src="demo_images/home_logo.svg" alt="Image" class="phone-1" data-aos="fade-right">
@@ -59,7 +59,7 @@
                                 <h3 class="mb-3">Manage Clients</h3>
                             <p>Add your clients into system with easy interface, Clients can be associated with projects in the system.</p>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
