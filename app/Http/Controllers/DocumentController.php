@@ -50,11 +50,11 @@ class DocumentController extends Controller
     public function store(Request $request)
     {   
         $messages = [
-            'mimes' => 'Supported file format for :attribute are jpeg,png,jpg,pdf,docx,doc',
+            'mimes' => 'Supported file format for :attribute are jpeg,png,jpg,pdf,docx,doc,txt',
         ];
         $file = $request->file('file');
         $validator = Validator::make($request->all(), [
-            'file' => 'required|file|max:5000|mimes:jpeg,png,jpg,pdf,docx,doc'
+            'file' => 'required|file|max:5000|mimes:jpeg,png,jpg,pdf,docx,doc,txt'
         ], $messages);
 
         if ($validator->fails()) {
