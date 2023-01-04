@@ -47,7 +47,7 @@
                   <td>
                      <a href="{{ route('configurations.edit',$configuration->id)}}" class="btn btn-primary">Edit</a>
                   </td>
-                  <!-- <td>
+                  <td>
                      @if(!in_array($configuration->path, ['delivery_charge_amount', 'delivery_free_amount', 'store_closed_message', 'store_status']))
                         <form action="{{ route('configurations.destroy', $configuration->id)}}" method="post">
                            @csrf
@@ -55,7 +55,7 @@
                            <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                      @endif
-                  </td> -->
+                  </td>
                </tr>
                @endforeach
             </tbody>

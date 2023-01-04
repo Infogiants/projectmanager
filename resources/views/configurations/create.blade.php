@@ -6,7 +6,7 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800">Add New Configuration</h1>
-   
+
 </div>
 <div class="card shadow mb-4">
 <div class="card-body">
@@ -28,8 +28,13 @@
     <form method="post" action="{{ route('configurations.store') }}">
         @csrf
         <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name" value="{{ old('name') }}" />
+        </div>
+        <div class="form-group">
             <label for="path">Path:</label>
             <input type="text" class="form-control {{ $errors->has('path') ? 'is-invalid' : '' }}" name="path" value="{{ old('path') }}" />
+            <small>Note: This will be used in code for dynamic configurations.</small>
         </div>
         <div class="form-group">
             <label for="value">Value:</label>

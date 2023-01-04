@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ConfigurationController extends Controller
 {
-    
+
     /**
      * Create a new controller instance.
      *
@@ -20,7 +20,7 @@ class ConfigurationController extends Controller
         $this->middleware(['auth', 'verified']);
         $this->middleware('role:admin');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -92,18 +92,18 @@ class ConfigurationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         $configuration = Configuration::find($id);
-        
+
         if ($configuration) {
             if (in_array('admin', Auth::user()->roles->pluck('slug')->toArray())):
-                return view('configurations.edit', compact('configuration'));   
+                return view('configurations.edit', compact('configuration'));
             else:
                 if ($configuration->user_id == Auth::user()->id):
                     return view('configurations.edit', compact('configuration'));
                 else:
                     return redirect('/configurations')->with('errors', 'Invalid configuration to edit!');
-                endif;    
+                endif;
             endif;
         } else {
             return redirect('/configurations')->with('errors', 'Invalid configuration to edit!');
@@ -121,13 +121,15 @@ class ConfigurationController extends Controller
     {
         $configuration = Configuration::find($id);
         $validator = Validator::make($request->all(), [
-            'value'=>'required|numeric|min:0'
+            'name' => 'required|string|max:255',
+            'value'=> 'required|string|max:255'
         ]);
 
         if ($validator->fails()) {
             return redirect('configurations/'.$id.'/edit')->withErrors($validator)->withInput();
         }
-        
+
+        $configuration->name = $request->get('name');
         $configuration->value = $request->get('value');
         $configuration->save();
         return redirect('/configurations')->with('success', 'Configuration updated!');
@@ -147,7 +149,7 @@ class ConfigurationController extends Controller
                 return redirect('/configurations')->with('errors', 'System reserved configurations can not be deleted!');
             }
             $configuration->delete();
-            return redirect('/configurations')->with('success', 'Configuration deleted!');  
+            return redirect('/configurations')->with('success', 'Configuration deleted!');
         } else {
             return redirect('/configurations')->with('errors', 'Invalid configuration to delete!');
         }
