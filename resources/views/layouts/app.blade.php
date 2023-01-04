@@ -29,7 +29,7 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ url('/') }}/assets/css/style.css" rel="stylesheet">
-    
+
 
     <!-- =======================================================
   * Template Name: SoftLand - v2.1.0
@@ -73,7 +73,7 @@
                                 @if (Route::has('register'))
                                     <li><a href="{{ route('register') }}" class="nav-link">Client Registration</a></li>
                                 @endif
-                            @endguest 
+                            @endguest
                             <?php
                             if (!empty(Auth::user())):
                                 if(in_array('user', Auth::user()->roles->pluck('slug')->toArray()) || in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
@@ -88,7 +88,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
-                                <?php 
+                                <?php
                                     endif;
                             endif;
                             ?>
@@ -109,7 +109,7 @@
     </header>
 
     <!-- ======= Hero Section ======= -->
-    
+
     <!-- End Hero -->
     @yield('content')
     <!-- End #main -->
@@ -144,11 +144,28 @@
                             <ul class="list-unstyled">
                                 <!-- <li><a href="{{ url('/') }}">About</a></li> -->
                                 @guest
-                                <li><a href="{{ route('login') }}">Login</a></li>
+                                    <li><a href="{{ route('login') }}">Login</a></li>
                                 @if (Route::has('register'))
                                     <li><a href="{{ route('register') }}" >Client Registration</a></li>
                                 @endif
                                 @endguest
+                                <?php
+                                    if (!empty(Auth::user())):
+                                        if(in_array('user', Auth::user()->roles->pluck('slug')->toArray()) || in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
+                                            <li>
+                                                 <a href="{{ route('home') }}" >Dashboard</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">Logout</a>
+                                            </li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                        <?php
+                                        endif;
+                                    endif;
+                                ?>
                             </ul>
                         </div>
                         <div class="col-md-4 mb-4 mb-md-0">
