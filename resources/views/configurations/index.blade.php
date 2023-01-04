@@ -30,9 +30,10 @@
                <tr>
                   <th>ID</th>
                   <th>Name</th>
+                  <th>Path</th>
                   <th>Value</th>
                   <th>Created By</th>
-                  <th colspan = 2>Actions</th>
+                  <th colspan = "2">Actions</th>
                </tr>
             </thead>
             <tbody>
@@ -40,20 +41,21 @@
                <tr>
                   <td>{{$configuration->id}}</td>
                   <td>{{$configuration->name}}</td>
+                  <td>{{$configuration->path}}</td>
                   <td>&#8377; {{$configuration->value}}</td>
                   <td>{{$configuration->user_id}}</td>
                   <td>
                      <a href="{{ route('configurations.edit',$configuration->id)}}" class="btn btn-primary">Edit</a>
                   </td>
-                  <td>
+                  <!-- <td>
                      @if(!in_array($configuration->path, ['delivery_charge_amount', 'delivery_free_amount', 'store_closed_message', 'store_status']))
                         <form action="{{ route('configurations.destroy', $configuration->id)}}" method="post">
                            @csrf
                            @method('DELETE')
                            <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
-                     @endif   
-                  </td>
+                     @endif
+                  </td> -->
                </tr>
                @endforeach
             </tbody>
