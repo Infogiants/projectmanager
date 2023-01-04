@@ -45,16 +45,44 @@
                <i class="fas fa-fw fa-store"></i>
                <span>Your Store</span></a>
             </li>
-            <li class="nav-item {{ (request()->is('projects*')) ? 'active' : '' }}">
+            <!-- <li class="nav-item {{ (request()->is('projects*')) ? 'active' : '' }}">
                <a class="nav-link" href="{{ url('/projects') }}">
                <i class="fas fa-fw fa-cubes"></i>
                <span>Projects</span></a>
+            </li> -->
+            <!-- Nav Item - Projects Collapse Menu -->
+            <li class="nav-item {{ (request()->is('projects*') || request()->is('categories*'))? 'active' : '' }}">
+               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProjects" aria-expanded="{{ (request()->is('projects*') || request()->is('categories*'))? 'true' : 'false' }}" aria-controls="collapseProjects">
+               <i class="fas fa-fw fa-wrench"></i>
+               <span>Projects</span>
+               </a>
+               <div id="collapseProjects" class="collapse {{ (request()->is('projects*') || request()->is('categories*'))? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                  <h6 class="collapse-header">Projects:</h6>
+                     <a class="collapse-item {{ (request()->is('projects*')) ? 'active' : '' }}" href="{{ url('/projects') }}">Projects</a>
+                     <a class="collapse-item {{ (request()->is('categories*')) ? 'active' : '' }}" href="{{ url('/categories') }}">Categories</a>
+                  </div>
+               </div>
             </li>
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
+            <!-- <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
                <a class="nav-link" href="{{ url('/users') }}">
                <i class="fas fa-fw fa-users"></i>
                <span>Users</span></a>
+            </li> -->
+            <!-- Nav Item - Users Collapse Menu -->
+            <li class="nav-item {{ (request()->is('users*') || request()->is('roles*') || request()->is('permissions*'))? 'active' : '' }}">
+               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="{{ (request()->is('users*') || request()->is('roles*') || request()->is('permissions*'))? 'true' : 'false' }}" aria-controls="collapseUsers">
+               <i class="fas fa-fw fa-wrench"></i>
+               <span>Users</span>
+               </a>
+               <div id="collapseUsers" class="collapse {{ (request()->is('users*') || request()->is('roles*') || request()->is('permissions*'))? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                  <h6 class="collapse-header">Users:</h6>
+                     <a class="collapse-item {{ (request()->is('users*')) ? 'active' : '' }}" href="{{ url('/users') }}">Users</a>
+                     <a class="collapse-item {{ (request()->is('roles*')) ? 'active' : '' }}" href="{{ url('/roles') }}">Roles</a>
+                     <a class="collapse-item {{ (request()->is('permissions*')) ? 'active' : '' }}" href="{{ url('/permissions') }}">Permissions</a>
+                  </div>
+               </div>
             </li>
             <li class="nav-item {{ (request()->is('contacts*')) ? 'active' : '' }}">
                <a class="nav-link" href="{{ url('/contacts') }}">
@@ -65,20 +93,14 @@
             <div class="sidebar-heading">
                 Addons
             </div>
-            <li class="nav-item {{ (request()->is('roles*') || request()->is('permissions*') || request()->is('configurations*') || request()->is('categories*')) ? 'active' : '' }}">
-               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="{{ (request()->is('roles*') || request()->is('permissions*') || request()->is('configurations*') || request()->is('categories*')) ? 'true' : 'false' }}" aria-controls="collapsePages">
+            <li class="nav-item {{ (request()->is('configurations*')) ? 'active' : '' }}">
+               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="{{ (request()->is('configurations*')) ? 'true' : 'false' }}" aria-controls="collapseUtilities">
                <i class="fas fa-fw fa-wrench"></i>
                <span>Utilities</span>
                </a>
-               <div id="collapsePages" class="collapse {{ (request()->is('roles*') || request()->is('permissions*') || request()->is('configurations*') || request()->is('categories*')) ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
+               <div id="collapseUtilities" class="collapse {{ (request()->is('configurations*')) ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
                   <div class="bg-white py-2 collapse-inner rounded">
-                  <h6 class="collapse-header">Projects:</h6>
-                     <a class="collapse-item {{ (request()->is('categories*')) ? 'active' : '' }}" href="{{ url('/categories') }}">Categories</a>
-                     <h6 class="collapse-header">Users:</h6>
-                     <a class="collapse-item {{ (request()->is('roles*')) ? 'active' : '' }}" href="{{ url('/roles') }}">Roles</a>
-                     <a class="collapse-item {{ (request()->is('permissions*')) ? 'active' : '' }}" href="{{ url('/permissions') }}">Permissions</a>
-                     <div class="collapse-divider"></div>
-                     <h6 class="collapse-header">Other:</h6>
+                     <h6 class="collapse-header">Utilities:</h6>
                      <a class="collapse-item {{ (request()->is('configurations*')) ? 'active' : '' }}" href="{{ url('/configurations') }}">Configurations</a>
                   </div>
                </div>
@@ -256,7 +278,7 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                            <a class="dropdown-item" href="#">
-                              <i class="fas fa-user fa-sm fa-fw mr-2"></i>
+                              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                               My Profile
                            </a>
                            <a class="dropdown-item" href="#">
@@ -264,9 +286,13 @@
                               Account Settings
                            </a>
                            <a class="dropdown-item" href="#">
+                              <i class="fas fa-question-circle fa-sm fa-fw mr-2 text-gray-400"></i>
+                              Need Help?
+                           </a>
+                           <!-- <a class="dropdown-item" href="#">
                               <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                               Activity Log
-                           </a>
+                           </a> -->
                            <div class="dropdown-divider"></div>
                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
