@@ -24,9 +24,21 @@ td.order_id {
     border-radius: 5px !important;
     background: white !important;
     color: #858796 !important;
-    min-height: 264px !important; 
+    min-height: 264px !important;
 }
 
 .dropzone .dz-message {
     margin: 6em 0 !important;
+}
+
+.store_enabled {
+    color: green;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.store_disabled {
+    color: red;
+    font-size: 20px;
+    vertical-align: middle;
 }

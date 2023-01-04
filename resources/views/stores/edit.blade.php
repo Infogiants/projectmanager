@@ -4,10 +4,11 @@
 
 @section('main')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-store text-gray-300"></i> Edit Your Store: {{ $store->id }}</h1>
-  
+   <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-store text-gray-300"></i> Edit Store</h1>
+
 </div>
 <div class="card shadow mb-4">
+<div class="card-header">Edit Store Details</div>
 <div class="card-body">
     <div>
         @if(session()->get('success'))
@@ -27,7 +28,7 @@
     <form method="post" action="{{ route('stores.update', $store->id) }}" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
-        <div class="row">    
+        <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label for="store_logo">Store Logo:</label>
@@ -43,14 +44,13 @@
                     @endempty
                 </div>
             </div>
-        </div>    
-       
+        </div>
         <div class="form-group">
             <label for="store_name">Store Name:</label>
             <input type="text" class="form-control {{ $errors->has('store_name') ? 'is-invalid' : '' }}" name="store_name" value="{{ $store->store_name }}" />
         </div>
         <div class="form-group">
-            <label for="store_website">Store Name:</label>
+            <label for="store_website">Store Website:</label>
             <input type="url" class="form-control {{ $errors->has('store_website') ? 'is-invalid' : '' }}" name="store_website" value="{{ $store->store_website }}" />
         </div>
         <div class="form-group">

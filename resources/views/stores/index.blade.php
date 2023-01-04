@@ -22,7 +22,7 @@
 <div>
 <?php if(count($stores) == 0) { ?>
    <a href="{{ route('stores.create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus" aria-hidden="true"></i> Add Your Store</a>
-<?php } ?>  
+<?php } ?>
 </div>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -53,7 +53,7 @@
                   </td>
                   <td>{{$store->store_name}}</td>
                   <td><a href="{{ $store->store_website }}" target="_blank" title="{{ $store->store_website }}">{{ $store->store_website }}</a></td>
-                  <td><?php echo ($store->store_status == '1') ? '<i class="fas fa-toggle-on"></i> Enabled' : '<i class="fas fa-toggle-off"></i> Disabled'; ?></td>
+                  <td><?php echo ($store->store_status == '1') ? '<i class="fas fa-toggle-on store_enabled"></i> Enabled' : '<i class="fas fa-toggle-off store_disabled"></i> Disabled'; ?></td>
                   <td>{{$store->store_contact_no}}</td>
                   <td>
                      <form action="{{ route('stores.destroy', $store->id)}}" method="post">

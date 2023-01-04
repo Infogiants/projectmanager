@@ -5,9 +5,10 @@
 @section('main')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-user text-gray-300"></i> Edit Contact: {{ $contact->id }}</h1>
-  
+
 </div>
 <div class="card shadow mb-4">
+<div class="card-header">Edit Contact Details</div>
 <div class="card-body">
     <div>
         @if(session()->get('success'))
@@ -27,7 +28,7 @@
     <form method="post" action="{{ route('contacts.update', $contact->id) }}">
         @method('PATCH')
         @csrf
-        
+
         <div class="form-group">
             <label for="first_name">First Name:</label>
             <input type="text" class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" name="first_name" value="{{ $contact->first_name }}" />

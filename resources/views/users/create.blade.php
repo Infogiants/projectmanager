@@ -7,9 +7,10 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-user text-gray-300"></i> Add New User</h1>
-   
+
 </div>
 <div class="card shadow mb-4">
+<div class="card-header">Add User Details</div>
 <div class="card-body">
     <div>
         @if(session()->get('success'))

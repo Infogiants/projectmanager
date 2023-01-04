@@ -23,6 +23,21 @@
          </div>
    </div>
    <div class="col-lg-2">
+         <div class="card mb-4 border-left-secondary">
+            <div class="card-body">
+               <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">To-do</div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $todo }}</div>
+                  </div>
+                  <div class="col-auto">
+                     <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+   </div>
+   <div class="col-lg-2">
          <div class="card mb-4 border-left-warning">
             <div class="card-body">
                <div class="row no-gutters align-items-center">
@@ -68,7 +83,7 @@
 <?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
 <div>
    <a href="{{ route('projects.create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus" aria-hidden="true"></i> Add New Project</a>
-</div> 
+</div>
 <?php endif; ?>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -96,13 +111,16 @@
                   <td>{{$project->id}}</td>
                   <td>{{$project->project_name}}</td>
                   <td><?php echo ($project->project_status == '1') ? 'Fixed Price' :  'Hourly Price'; ?></td>
-                  <td>{{$project->project_price}} &#8377;</td>
+                  <td>{{$project->project_price}} {{$project->project_currency}} </td>
                   <td>
-                  <?php if($project->project_status == 1): ?>
+                              <?php if($project->project_status == 0): ?>
+                                 <label class="btn btn-secondary">To-do</label>
+                              <?php endif; ?>
+                              <?php if($project->project_status == 1): ?>
                                  <label class="btn btn-info active">In-Progress</label>
                               <?php endif; ?>
 
-                              <?php if($project->project_status == 0): ?>
+                              <?php if($project->project_status == 2): ?>
                                  <label class="btn btn-success">Completed</label>
                               <?php endif; ?>
                  </td>

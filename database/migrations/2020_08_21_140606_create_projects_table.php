@@ -18,6 +18,7 @@ class CreateProjectsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('project_category_id');
             $table->string('project_name');
+            $table->string('project_currency');
             $table->tinyInteger('project_type');
             $table->float('project_price');
             $table->text('project_description');

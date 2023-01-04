@@ -6,9 +6,10 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-user text-gray-300"></i> Edit User: {{ $user->id }}</h1>
-  
+
 </div>
 <div class="card shadow mb-4">
+<div class="card-header">Edit User Details</div>
 <div class="card-body">
     <div>
         @if(session()->get('success'))
@@ -47,7 +48,7 @@
             <input type="password" class="form-control" name="password_confirmation" value="" />
         </div>
         <div class="form-group">
-            <label for="name">Roles:</label><br><br>
+            <h5 class="mb-4">Roles</h5>
             @foreach($user->allroles as $k => $role)
             <input type="checkbox" name="role_ids[]" value="{{$k}}" <?php echo (in_array($k, $user->roles->pluck('id')->toArray()) ? 'checked': '')?>>
             <label for="role_ids">{{$role}}</label><br>

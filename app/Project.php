@@ -16,7 +16,8 @@ class Project extends Model
         'project_end_date',
         'project_status',
         'project_description',
-        'client_user_id'
+        'client_user_id',
+        'project_currency'
     ];
 
     public function category()

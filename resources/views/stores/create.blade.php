@@ -5,9 +5,10 @@
 @section('main')
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-store text-gray-300"></i> Add Your Store</h1>   
+   <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-store text-gray-300"></i> Add Your Store</h1>
 </div>
 <div class="card shadow mb-4">
+<div class="card-header">Add Store Details</div>
 <div class="card-body">
     <div>
         @if(session()->get('success'))
@@ -30,7 +31,7 @@
             <label for="store_logo">Store Logo:</label>
             <input type="file" class="form-control-file border {{ $errors->has('store_logo') ? 'is-invalid' : '' }}" name="store_logo" value="{{ old('store_logo') }}" />
         </div>
-        
+
         <div class="form-group">
             <label for="store_name">Store Name:</label>
             <input type="text" class="form-control {{ $errors->has('store_name') ? 'is-invalid' : '' }}" name="store_name" value="{{ old('store_name') }}" />
