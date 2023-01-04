@@ -3,7 +3,7 @@
 @section('main')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-users text-gray-300"></i> Contacts</h1>
+   <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-address-card text-gray-300"></i> Contacts</h1>
    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Export Contacts</a>
 </div>
 <p class="mb-4">Business contacts section, You can manage your important contact details from this page.</p>

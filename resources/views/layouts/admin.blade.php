@@ -45,15 +45,10 @@
                <i class="fas fa-fw fa-store"></i>
                <span>Your Store</span></a>
             </li>
-            <!-- <li class="nav-item {{ (request()->is('projects*')) ? 'active' : '' }}">
-               <a class="nav-link" href="{{ url('/projects') }}">
-               <i class="fas fa-fw fa-cubes"></i>
-               <span>Projects</span></a>
-            </li> -->
             <!-- Nav Item - Projects Collapse Menu -->
             <li class="nav-item {{ (request()->is('projects*') || request()->is('categories*'))? 'active' : '' }}">
                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProjects" aria-expanded="{{ (request()->is('projects*') || request()->is('categories*'))? 'true' : 'false' }}" aria-controls="collapseProjects">
-               <i class="fas fa-fw fa-wrench"></i>
+               <i class="fas fa-fw fa-cubes"></i>
                <span>Projects</span>
                </a>
                <div id="collapseProjects" class="collapse {{ (request()->is('projects*') || request()->is('categories*'))? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
@@ -64,15 +59,10 @@
                   </div>
                </div>
             </li>
-            <!-- <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
-               <a class="nav-link" href="{{ url('/users') }}">
-               <i class="fas fa-fw fa-users"></i>
-               <span>Users</span></a>
-            </li> -->
             <!-- Nav Item - Users Collapse Menu -->
             <li class="nav-item {{ (request()->is('users*') || request()->is('roles*') || request()->is('permissions*'))? 'active' : '' }}">
                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="{{ (request()->is('users*') || request()->is('roles*') || request()->is('permissions*'))? 'true' : 'false' }}" aria-controls="collapseUsers">
-               <i class="fas fa-fw fa-wrench"></i>
+               <i class="fas fa-fw fa-users"></i>
                <span>Users</span>
                </a>
                <div id="collapseUsers" class="collapse {{ (request()->is('users*') || request()->is('roles*') || request()->is('permissions*'))? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
@@ -86,7 +76,7 @@
             </li>
             <li class="nav-item {{ (request()->is('contacts*')) ? 'active' : '' }}">
                <a class="nav-link" href="{{ url('/contacts') }}">
-               <i class="fas fa-fw fa-users"></i>
+               <i class="fas fa-fw fa-address-card"></i>
                <span>Contacts</span></a>
             </li>
             <hr class="sidebar-divider">
