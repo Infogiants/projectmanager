@@ -31,11 +31,11 @@
             <label for="name">Name:</label>
             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name" value="{{ old('name') }}" />
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="path">Path:</label>
             <input type="text" class="form-control {{ $errors->has('path') ? 'is-invalid' : '' }}" name="path" value="{{ old('path') }}" />
             <small>Note: This will be used in code for dynamic configurations.</small>
-        </div>
+        </div> -->
         <div class="form-group">
             <label for="value">Value:</label>
             <input type="text" class="form-control {{ $errors->has('value') ? 'is-invalid' : '' }}" name="value" value="{{ old('value') }}" />

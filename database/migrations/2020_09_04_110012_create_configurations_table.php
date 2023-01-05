@@ -17,7 +17,7 @@ class CreateConfigurationsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('name');
-            $table->string('path');
+            $table->string('path')->unique();
             $table->string('value');
             $table->timestamps();
 

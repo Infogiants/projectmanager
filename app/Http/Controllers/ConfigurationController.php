@@ -6,6 +6,7 @@ use App\Configuration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ConfigurationController extends Controller
 {
@@ -68,21 +69,29 @@ class ConfigurationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'path'=> 'required|string|max:255|unique:configurations,path',
-            'value'=>'required|numeric|min:0'
+            'value'=>'required|string|min:0'
         ]);
 
         if ($validator->fails()) {
             return redirect('configurations/create')->withErrors($validator)->withInput();
         }
 
+        $path = Str::slug($request->get('name'), '_');
+
         $configuration = new configuration([
             'user_id' => Auth::user()->id,
             'name' => $request->get('name'),
-            'path' => $request->get('path'),
+            'path' => $path,
             'value' => $request->get('value')
         ]);
-        $configuration->save();
+
+        try {
+            $configuration->save();
+        } catch(\Illuminate\Database\QueryException $e){
+            //$e->getMessage(), duplicate path error, handle custom message
+            return redirect('/configurations')->with('errors', 'Can not add new configuration, Duplicate configuration found: '.$path.', Please use a different configuration name to fix this error.');
+        }
+
         return redirect('/configurations')->with('success', 'Configuration saved!');
     }
 
