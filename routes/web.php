@@ -41,5 +41,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('documents', 'DocumentController');
     Route::resource('tasks', 'TaskController');
     Route::resource('comments', 'CommentController');
+    Route::resource('efforts', 'EffortController');
 });
 

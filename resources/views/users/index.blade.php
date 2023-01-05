@@ -37,7 +37,7 @@
                   <th colspan = 2>Actions</th>
                </tr>
             </thead>
-            @foreach($users as $user)
+            @forelse($users as $user)
             <tr>
                <td>{{$user->name}}</td>
                <td>{{$user->email}}</td>
@@ -54,7 +54,11 @@
                   </form>
                </td>
             </tr>
-            @endforeach
+            @empty
+               <tr>
+                  <td colspan="8" class="text-center">No users found</td>
+               </tr>
+            @endforelse
             </tbody>
          </table>
          {{ $users->links() }}

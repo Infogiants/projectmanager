@@ -4,15 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Effort extends Model
 {
     protected $fillable = [
         'user_id',
         'project_id',
-        'title',
-        'description',
-        'status',
-        'estimated_hours'
+        'task_id',
+        'hour'
     ];
 
     public function user()
@@ -23,5 +21,10 @@ class Task extends Model
     public function project()
     {
         return $this->hasOne('App\Project', 'id', 'project_id');
+    }
+
+    public function task()
+    {
+        return $this->hasOne('App\Task', 'id', 'task_id');
     }
 }

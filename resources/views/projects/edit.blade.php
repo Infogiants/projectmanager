@@ -83,7 +83,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="project_price">Price</label>
-                    <input type="number" class="form-control {{ $errors->has('project_price') ? 'is-invalid' : '' }}" name="project_price" value="{{ $project->project_price }}" />
+                    <input type="number" class="form-control {{ $errors->has('project_price') ? 'is-invalid' : '' }}" name="project_price" value="{{ $project->project_price }}" title="Add price based on type Fixed/Hourly" />
                 </div>
             </div>
         </div>

@@ -39,7 +39,7 @@
                </tr>
             </thead>
             <tbody>
-               @foreach($contacts as $contact)
+               @forelse($contacts as $contact)
                <tr>
                   <td>{{$contact->id}}</td>
                   <td>{{$contact->first_name}} {{$contact->last_name}}</td>
@@ -58,7 +58,11 @@
                      </form>
                   </td>
                </tr>
-               @endforeach
+               @empty
+               <tr>
+                  <td colspan="8" class="text-center">No contacts found</td>
+               </tr>
+               @endforelse
             </tbody>
          </table>
          {{ $contacts->links() }}

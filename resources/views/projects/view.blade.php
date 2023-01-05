@@ -190,10 +190,16 @@
                                  </select>
                               </div>
                            </div>
+                           <div class="col">
+                              <div class="form-group">
+                                 <label for="estimated_hours">Estimated Hours:</label>
+                                 <input type="number" class="form-control {{ $errors->has('estimated_hours') ? 'is-invalid' : '' }}" name="estimated_hours" value="{{ old('estimated_hours') }}" min="0" tabindex="3" autofocus/>
+                              </div>
+                           </div>
                         </div>
                         <div class="form-group">
                            <label for="description">Description:</label>
-                           <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" rows="5" tabindex="3">{{ old('description') }}</textarea>
+                           <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" rows="5" tabindex="4">{{ old('description') }}</textarea>
                         </div>
                         <input type="hidden" name="project_id" value="<?php echo $project->id; ?>" />
                         <button type="submit" class="btn btn-primary float-right mb-4" tabindex="4">Save</button>
@@ -207,12 +213,13 @@
                            <th>ID</th>
                            <th>Title</th>
                            <th>Status</th>
+                           <th>Estimated Hours</th>
                            <th>Created By</th>
                            <th colspan="3">Actions</th>
                         </tr>
                      </thead>
                      <tbody>
-                        @foreach($tasks as $task)
+                        @forelse($tasks as $task)
                         <tr>
                            <td>{{$task->id}}</td>
                            <td>{{$task->title}}</td>
@@ -227,6 +234,7 @@
                               <label class="btn btn-success">Completed</label>
                               <?php endif; ?>
                            </td>
+                           <td>{{$task->estimated_hours}}</td>
                            <td>{{ $task->user()->first()->toArray()['name'] }}</td>
                            <?php if (Auth::user()->id === $task->user_id): ?>
                            <td>
@@ -248,7 +256,11 @@
                            </td>
                            <?php endif;?>
                         </tr>
-                        @endforeach
+                        @empty
+                           <tr>
+                              <td colspan="8" class="text-center">No tasks found</td>
+                           </tr>
+                        @endforelse
                      </tbody>
                   </table>
                   {{ $tasks->appends(request()->except('taskpage'))->links() }}
@@ -292,7 +304,7 @@
                         </tr>
                      </thead>
                      <tbody>
-                        @foreach($documents as $document)
+                        @forelse($documents as $document)
                         <tr>
                            <td>{{$document->id}}</td>
                            <td>{{$document->name}}</td>
@@ -314,7 +326,11 @@
                            </td>
                            <?php endif;?>
                         </tr>
-                        @endforeach
+                        @empty
+                           <tr>
+                              <td colspan="8" class="text-center">No documents found</td>
+                           </tr>
+                        @endforelse
                      </tbody>
                   </table>
                   {{ $documents->appends(request()->except('documentpage'))->links() }}

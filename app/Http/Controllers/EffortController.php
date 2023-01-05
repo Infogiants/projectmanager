@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Effort;
 use App\Task;
-use App\Comment;
 use App\User;
 use App\Project;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class CommentController extends Controller
+class EffortController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,7 +21,7 @@ class CommentController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
-        $this->middleware('role:admin,user');
+        $this->middleware('role:admin');
     }
 
     /**
@@ -41,7 +41,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        return view('efforts.create');
     }
 
     /**
@@ -52,33 +52,34 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
-            'task_id'=>'required|'.Rule::in(Task::where('id', '<>', 0)->pluck('id')->toArray()),
+            'hour'=>'required|numeric|min:1',
             'project_id' => 'required|'.Rule::in(Project::where('id', '<>', 0)->pluck('id')->toArray()),
-            'description' => 'required|string|max:255'
+            'task_id' => 'required|'.Rule::in(Task::where('id', '<>', 0)->pluck('id')->toArray())
         ]);
 
         if ($validator->fails()) {
             return redirect('tasks/'.$request->get('task_id'))->withErrors($validator)->withInput();
         }
 
-        $task = new Comment([
-            'description' => $request->get('description') ?? '',
+        $effort = new Effort([
+            'hour' => $request->get('hour'),
             'user_id' => Auth::user()->id,
-            'task_id' => $request->get('task_id'),
-            'project_id' => $request->get('project_id')
+            'project_id' => $request->get('project_id'),
+            'task_id' => $request->get('task_id')
         ]);
-        $task->save();
-        return redirect('/tasks/'.$request->get('task_id'))->with('success', 'Comment Added Successfully!');
+        $effort->save();
+        return redirect('/tasks/'.$request->get('task_id'))->with('success', 'Efforts logged Successfully!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Effort  $effort
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(Effort $effort)
     {
         //
     }
@@ -86,10 +87,10 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Effort  $effort
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(Effort $effort)
     {
         //
     }
@@ -98,10 +99,10 @@ class CommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
+     * @param  \App\Effort  $effort
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Effort $effort)
     {
         //
     }
@@ -109,18 +110,18 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Effort  $effort
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Effort $effort)
     {
-        $comment = Comment::find($comment->id);
-        $taskId = $comment->task_id;
-        if ($comment) {
-            $comment->delete();
-            return redirect('/tasks/'.$taskId)->with('success', 'Comment deleted successfully!');
+        $effort = Effort::find($effort->id);
+        $taskId = $effort->task_id;
+        if ($effort) {
+            $effort->delete();
+            return redirect('/tasks/'.$taskId)->with('success', 'Effort deleted successfully!');
         } else {
-            return redirect('/tasks/'.$taskId)->with('errors', 'Invalid Comment to delete!');
+            return redirect('/tasks/'.$taskId)->with('errors', 'Invalid Effort to delete!');
         }
     }
 }

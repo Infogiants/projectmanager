@@ -37,7 +37,7 @@
                </tr>
             </thead>
             <tbody>
-               @foreach($configurations as $configuration)
+               @forelse($configurations as $configuration)
                <tr>
                   <td>{{$configuration->id}}</td>
                   <td>{{$configuration->name}}</td>
@@ -57,7 +57,11 @@
                      @endif
                   </td>
                </tr>
-               @endforeach
+               @empty
+               <tr>
+                  <td colspan="8" class="text-center">No configurations found</td>
+               </tr>
+               @endforelse
             </tbody>
          </table>
          {{ $configurations->links() }}

@@ -7,6 +7,7 @@ use App\Document;
 use App\Comment;
 use App\User;
 use App\Project;
+use App\Effort;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ use Storage;
 
 class TaskController extends Controller
 {
-    
+
     /**
      * Create a new controller instance.
      *
@@ -55,24 +56,26 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $validator = Validator::make($request->all(), [
             'title'=>'required|string|max:255',
             'description' => 'required|string|max:255',
             'project_id' => 'required|'.Rule::in(Project::where('id', '<>', 0)->pluck('id')->toArray()),
-            'status'=>'required|string|max:255|'.Rule::in($this->status),
+            'status'=> 'required|string|max:255|'.Rule::in($this->status),
+            'estimated_hours' => 'required|numeric|min:0',
         ]);
-        
+
         if ($validator->fails()) {
             return redirect('projects/'.$request->get('project_id'))->withErrors($validator)->withInput();
         }
-        
+
         $task = new Task([
             'title' => $request->get('title'),
             'description' => $request->get('description') ?? '',
             'user_id' => Auth::user()->id,
             'project_id' => $request->get('project_id'),
             'status' => $request->get('status'),
+            'estimated_hours' => $request->get('estimated_hours')
         ]);
         $task->save();
         return redirect('/projects/'.$request->get('project_id'))->with('success', 'Task Added Successfully!');
@@ -85,14 +88,16 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Task $task)
-    {   
+    {
         $task = Task::find($task->id);
         if ($task) {
             $comments = Comment::where('task_id', $task->id)->orderBy('id', 'asc')->paginate(10,['*'],'commentpage');
             $commentscount = Comment::where('task_id', $task->id)->count();
             $documents = Document::where('task_id', $task->id)->orderByDesc('id')->paginate(4,['*'],'documentpage');
             $documentscount = Document::where('task_id', $task->id)->count();
-            return view('tasks.view', compact('task', 'comments', 'documents', 'documentscount', 'commentscount'));   
+            $efforts = Effort::where('task_id', $task->id)->orderByDesc('id')->paginate(4,['*'],'effortpage');
+            $all = Effort::where('task_id', $task->id)->sum('hour');
+            return view('tasks.view', compact('task', 'comments', 'documents', 'documentscount', 'commentscount', 'efforts', 'all'));
         } else {
             return redirect('/projects')->with('errors', 'Invalid task to view!');
         }
@@ -108,7 +113,7 @@ class TaskController extends Controller
     {
         $task = Task::find($task->id);
         if ($task) {
-            return view('tasks.edit', compact('task'));   
+            return view('tasks.edit', compact('task'));
         } else {
             return redirect('/projects')->with('errors', 'Invalid task to edit!');
         }
@@ -128,8 +133,9 @@ class TaskController extends Controller
             'title'=>'required|string|max:255',
             'description' => 'required|string|max:255',
             'status'=>'required|string|max:255|'.Rule::in($this->status),
+            'estimated_hours' => 'required|numeric|min:0',
         ]);
-        
+
         if ($validator->fails()) {
             return redirect('tasks/'.$id.'/edit')->withErrors($validator)->withInput();
         }
@@ -137,8 +143,9 @@ class TaskController extends Controller
         $task->title =  $request->get('title');
         $task->description = $request->get('description');
         $task->status = $request->get('status');
+        $task->estimated_hours = $request->get('estimated_hours');
         $task->save();
-        
+
         return redirect('/projects/'.$task->project_id)->with('success', 'Task updated!');
     }
 
@@ -159,7 +166,7 @@ class TaskController extends Controller
         }
         if ($task) {
             $task->delete();
-            return redirect('/projects/'.$projectId)->with('success', 'Task deleted!'); 
+            return redirect('/projects/'.$projectId)->with('success', 'Task deleted!');
         } else {
             return redirect('/projects/'.$projectId)->with('errors', 'Invalid Task to delete!');
         }

@@ -30,7 +30,7 @@
    <div class="card-body">
       <div class="table-responsive">
          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            
+
         <thead>
             <tr>
                 <td>ID</td>
@@ -43,7 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($categories as $category)
+            @forelse($categories as $category)
             <tr>
                 <td>{{$category->id}}</td>
                 <td>
@@ -68,7 +68,11 @@
                     </form>
                 </td>
             </tr>
-            @endforeach
+            @empty
+               <tr>
+                  <td colspan="8" class="text-center">No categories found</td>
+               </tr>
+            @endforelse
         </tbody>
     </table>
     {{ $categories->links() }}

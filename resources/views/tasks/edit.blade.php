@@ -45,6 +45,12 @@
                     </select>
                </div>
             </div>
+            <div class="col">
+               <div class="form-group">
+                  <label for="estimated_hours">Estimated Hours:</label>
+                  <input type="number" class="form-control {{ $errors->has('estimated_hours') ? 'is-invalid' : '' }}" name="estimated_hours" value="{{ $task->estimated_hours }}" min="0" />
+               </div>
+            </div>
          </div>
          <div class="form-group">
             <label for="description">Description:</label>
