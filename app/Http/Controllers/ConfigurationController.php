@@ -11,6 +11,13 @@ class ConfigurationController extends Controller
 {
 
     /**
+     * Reserved Configurations
+     * This stores the array of confgurations path that admin can not delete, these are used in webapp.
+     * eg: ['delivery_charge_amount', 'delivery_free_amount']
+     */
+    public $reservedConfigurations;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -19,6 +26,10 @@ class ConfigurationController extends Controller
     {
         $this->middleware(['auth', 'verified']);
         $this->middleware('role:admin');
+        /**
+         * Reserved
+         */
+        $this->reservedConfigurations = [];
     }
 
     /**
@@ -28,12 +39,13 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
+        $reservedConfigurations = $this->reservedConfigurations;
         if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())):
             $configurations = Configuration::orderByDesc('id')->paginate(4);
         else:
             $configurations = Configuration::where('user_id', Auth::user()->id)->orderByDesc('id')->paginate(4);
         endif;
-        return view('configurations.index', compact('configurations'));
+        return view('configurations.index', ['configurations' => $configurations, 'reservedConfigurations' => $reservedConfigurations]);
     }
 
     /**
@@ -145,7 +157,7 @@ class ConfigurationController extends Controller
     {
         $configuration = Configuration::find($id);
         if ($configuration) {
-            if(in_array($configuration->path, ['delivery_charge_amount', 'delivery_free_amount'])) {
+            if(in_array($configuration->path, $this->reservedConfigurations)) {
                 return redirect('/configurations')->with('errors', 'System reserved configurations can not be deleted!');
             }
             $configuration->delete();
