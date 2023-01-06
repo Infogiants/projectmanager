@@ -91,7 +91,7 @@ class TaskController extends Controller
     {
         $task = Task::find($task->id);
         if ($task) {
-            $comments = Comment::where('task_id', $task->id)->orderBy('id', 'asc')->paginate(10,['*'],'commentpage');
+            $comments = Comment::where('task_id', $task->id)->orderBy('created_at', 'desc')->paginate(5,['*'],'commentpage');
             $commentscount = Comment::where('task_id', $task->id)->count();
             $documents = Document::where('task_id', $task->id)->orderByDesc('id')->paginate(4,['*'],'documentpage');
             $documentscount = Document::where('task_id', $task->id)->count();
