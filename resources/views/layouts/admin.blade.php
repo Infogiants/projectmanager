@@ -70,7 +70,7 @@
                   <h6 class="collapse-header">Users:</h6>
                      <a class="collapse-item {{ (request()->is('users*')) ? 'active' : '' }}" href="{{ url('/users') }}">Users</a>
                      <a class="collapse-item {{ (request()->is('roles*')) ? 'active' : '' }}" href="{{ url('/roles') }}">Roles</a>
-                     <a class="collapse-item {{ (request()->is('permissions*')) ? 'active' : '' }}" href="{{ url('/permissions') }}">Permissions</a>
+                     <!-- <a class="collapse-item {{ (request()->is('permissions*')) ? 'active' : '' }}" href="{{ url('/permissions') }}">Permissions</a> -->
                   </div>
                </div>
             </li>

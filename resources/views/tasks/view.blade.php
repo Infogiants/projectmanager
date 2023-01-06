@@ -160,10 +160,15 @@
                   <form method="post" action="{{ route('efforts.store') }}">
                         @csrf
                         <div class="row">
-                           <div class="col-lg-12">
+                           <div class="col-lg-7">
+                              <div class="form-group">
+                                 <input type="summary" placeholder="Summary" class="form-control {{ $errors->has('summary') ? 'is-invalid' : '' }}" name="summary" value="{{ old('summary') }}" tabindex="1" autofocus/>
+                              </div>
+                           </div>
+                           <div class="col">
                               <div class="input-group mb-4">
                                  <div class="hour">
-                                    <input type="number" class="form-control {{ $errors->has('hour') ? 'is-invalid' : '' }}" name="hour" value="{{ old('hour') }}" tabindex="1" autofocus min="1"/>
+                                    <input type="number" class="form-control {{ $errors->has('hour') ? 'is-invalid' : '' }}" name="hour" value="{{ old('hour') }}" tabindex="2" autofocus min="1"/>
                                  </div>
                                  <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-plus" aria-hidden="true"></i> Add Efforts</button>
@@ -180,6 +185,7 @@
                      <thead>
                         <tr>
                            <th>ID</th>
+                           <th>Summary</th>
                            <th>Hour</th>
                            <th>Logged By</th>
                            <th>Date</th>
@@ -190,6 +196,7 @@
                         @forelse($efforts as $effort)
                         <tr>
                            <td>{{$effort->id}}</td>
+                           <td>{{$effort->summary}}</td>
                            <td>{{$effort->hour}}</td>
                            <td>{{ $effort->user()->first()->toArray()['name'] }}</td>
                            <td>{{  \Carbon\Carbon::parse($effort->created_at)->format('F j, Y - h:i a') }}</td>

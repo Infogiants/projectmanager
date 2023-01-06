@@ -110,8 +110,8 @@
                <tr>
                   <td>{{$project->id}}</td>
                   <td>{{$project->project_name}}</td>
-                  <td><?php echo ($project->project_status == '1') ? 'Fixed Price' :  'Hourly Price'; ?></td>
-                  <td>{{$project->project_price}} {{$project->project_currency}} </td>
+                  <td><?php echo ($project->project_type == '1') ? 'Fixed Price' :  'Hourly Price'; ?></td>
+                  <td>{{$project->project_price}} {{$project->project_currency}} <?php echo ($project->project_type == '1' ? '' : '/ Hour')?> </td>
                   <td>
                               <?php if($project->project_status == 0): ?>
                                  <label class="btn btn-secondary">To-do</label>

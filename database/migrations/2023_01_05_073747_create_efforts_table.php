@@ -19,6 +19,7 @@ class CreateEffortsTable extends Migration
             $table->unsignedInteger('project_id');
             $table->unsignedInteger('task_id');
             $table->integer('hour');
+            $table->string('summary');
             $table->timestamps();
 
             //FOREIGN KEY CONSTRAINTS

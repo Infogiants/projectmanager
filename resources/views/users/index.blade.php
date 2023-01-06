@@ -33,8 +33,7 @@
                   <th>Email</th>
                   <th>Email Verified</th>
                   <th>Roles</th>
-                  <th>Phone</th>
-                  <th colspan = 2>Actions</th>
+                  <th colspan = 3>Actions</th>
                </tr>
             </thead>
             @forelse($users as $user)
@@ -43,6 +42,7 @@
                <td>{{$user->email}}</td>
                <td>{{!empty($user->email_verified_at) ? 'Yes': 'No'}}</td>
                <td>{{ implode(", ", $user->roles->pluck('name')->toArray()) }}</td>
+               <td> <a href="{{ route('users.show',$user->id)}}" class="btn btn-primary">View</a></td>
                <td>
                   <a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary">Edit</a>
                </td>

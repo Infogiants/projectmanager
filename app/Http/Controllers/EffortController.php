@@ -55,6 +55,7 @@ class EffortController extends Controller
 
         $validator = Validator::make($request->all(), [
             'hour'=>'required|numeric|min:1',
+            'summary' => 'required|string|max:255',
             'project_id' => 'required|'.Rule::in(Project::where('id', '<>', 0)->pluck('id')->toArray()),
             'task_id' => 'required|'.Rule::in(Task::where('id', '<>', 0)->pluck('id')->toArray())
         ]);
@@ -65,6 +66,7 @@ class EffortController extends Controller
 
         $effort = new Effort([
             'hour' => $request->get('hour'),
+            'summary' => $request->get('summary'),
             'user_id' => Auth::user()->id,
             'project_id' => $request->get('project_id'),
             'task_id' => $request->get('task_id')

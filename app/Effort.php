@@ -10,7 +10,8 @@ class Effort extends Model
         'user_id',
         'project_id',
         'task_id',
-        'hour'
+        'hour',
+        'summary'
     ];
 
     public function user()

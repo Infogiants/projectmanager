@@ -19,7 +19,7 @@
    @endif
 </div>
 <div>
-   <a href="{{ route('roles.create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus" aria-hidden="true"></i> Add New Role</a>
+   <!-- <a href="{{ route('roles.create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus" aria-hidden="true"></i> Add New Role</a> -->
 </div>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -29,14 +29,15 @@
             <thead>
                <tr>
                   <td>Name</td>
-                  <td colspan = 2>Actions</td>
+                  <td>Details</td>
                </tr>
             </thead>
             <tbody>
                @foreach($roles as $role)
                <tr>
                   <td>{{$role->name}}</td>
-                  <td>
+                  <td><?php echo ($role->name == 'User') ? 'This role is defined for client users' : 'This role is defined for administrator users' ?></td>
+                  <!-- <td>
                      <a href="{{ route('roles.edit',$role->id)}}" class="btn btn-primary">Edit</a>
                   </td>
                   <td>
@@ -45,7 +46,7 @@
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit">Delete</button>
                      </form>
-                  </td>
+                  </td> -->
                </tr>
                @endforeach
             </tbody>
