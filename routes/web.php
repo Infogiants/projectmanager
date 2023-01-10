@@ -42,5 +42,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('tasks', 'TaskController');
     Route::resource('comments', 'CommentController');
     Route::resource('efforts', 'EffortController');
+
+    //Payment Test
+    Route::get('/payment', 'PaymentController@index');
+    Route::post('/payment', 'PaymentController@payment')->name('payment');;
 });
+
 

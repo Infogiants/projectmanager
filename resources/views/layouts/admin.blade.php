@@ -74,6 +74,11 @@
                   </div>
                </div>
             </li>
+            <li class="nav-item {{ (request()->is('payment*')) ? 'active' : '' }}">
+               <a class="nav-link" href="{{ url('/payment') }}">
+               <i class="fas fa-fw fa-dollar-sign"></i>
+               <span>Payment</span></a>
+            </li>
             <li class="nav-item {{ (request()->is('contacts*')) ? 'active' : '' }}">
                <a class="nav-link" href="{{ url('/contacts') }}">
                <i class="fas fa-fw fa-address-card"></i>
