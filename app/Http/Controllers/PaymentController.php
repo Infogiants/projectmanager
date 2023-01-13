@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stripe;
 use Session;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
@@ -21,36 +22,39 @@ class PaymentController extends Controller
         return view('payments.payment');
     }
 
-    //Make payment & refund poc
+    //Make Payment or Capture Charge
     public function payment(Request $request)
     {
         // Set API secret
         Stripe\Stripe::setApiKey(config('stripe.api_keys.stripe_secret'));
 
-        //Create a charge 
+        //Create a charge
         $response = Stripe\Charge::create ([
-                "amount" => 50 * 100,
+                "amount" => 100 * 100,
                 "currency" => "inr",
                 "source" => $request->stripeToken,
-                "description" => "Making test payment of 50 ruppes." 
+                "description" => "Making test payment of 100 ruppes at time - ".Carbon::now()->toFormattedDateString()
         ]);
 
-        echo "<pre>";
-        print_r($response);
-        die;
+        //$respomse obj if paid set to 1
+        Session::flash('success', 'Payment has been successfully processed.');
+
+        return back();
+    }
+
+    //Refund a charge
+    public function refund($chargeId)
+    {
+        // Set API secret
+        Stripe\Stripe::setApiKey(config('stripe.api_keys.stripe_secret'));
 
        //  //create full refund by charge id
-       //  $response = Stripe\Refund::create ([
-       //     'charge' => 'ch_1MOhjCBXq1Ys4N5RiOIx7rM6'
-       //  ]);
+        $response = Stripe\Refund::create ([
+           'charge' => $chargeId
+        ]);
 
-       //  echo "<pre>";
-       //  print_r($response);
-       //  die;
-           
-       //$respomse obj if paid set to 1
-        Session::flash('success', 'Payment has been successfully processed.');
-          
+        Session::flash('success', 'Refund has been successfully processed for chargeId - '.$chargeId);
+
         return back();
     }
 }
