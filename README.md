@@ -4,25 +4,26 @@
 
 ## About Application
 
-It's project manager web application for manging projects, clients, invoices, tasks etc for individual to small business. It's Developed using Laravel v7.15.0. 
+It's project manager web application for manging projects, clients, tasks etc for individual to small business. It's Developed using Laravel v7.15.0. 
 
 ###### Completed
 
 - User/Client Login Module 
 - Admin Contacts Management Module
 - Admin User Management Module
-- Admin Role Management Module
-- Admin Role Permision Management Module
+- Admin Role View Module
 - Admin Store/Business Mangement Module
 - Project Category Mangement Module
 - Project Management Module
 - Project Tasks Management Module
 - Task Comments Management Module
-- Project and Task Document Management Modul
+- Task Time Logging Module
+- Payment POC - Using Stripe Charge/Refund
 
 ###### In-Progress
 
 - Bug fixing in existing features and testing
+- Project Billing Module
 
 ###### To-do
 
