@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Task;
+use App\Effort;
 
 class Project extends Model
 {
@@ -33,5 +35,21 @@ class Project extends Model
     public function client()
     {
         return $this->hasOne('App\User', 'id', 'client_user_id');
+    }
+
+    public function estimatedHours($project) {
+        $estimatedHours = Task::where([
+            ['project_id', '=', $project->id],
+            ['user_id', '=', $project->user_id]
+        ])->sum('estimated_hours');
+        return $estimatedHours;
+    }
+
+    public function loggedHours($project) {
+        $loggedHours = Effort::where([
+            ['project_id', '=', $project->id],
+            ['user_id', '=', $project->user_id]
+        ])->sum('hour');
+        return $loggedHours;
     }
 }

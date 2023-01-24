@@ -96,6 +96,8 @@
                   <th>Name</th>
                   <th>Type</th>
                   <th>Price</th>
+                  <!-- <th>Estimated Hours</th>
+                  <th>Logged Hours</th> -->
                   <th>Status</th>
                   <?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
                      <th>Client</th>
@@ -112,6 +114,8 @@
                   <td>{{$project->project_name}}</td>
                   <td><?php echo ($project->project_type == '1') ? 'Fixed Price' :  'Hourly Price'; ?></td>
                   <td>{{$project->project_price}} {{$project->project_currency}} <?php echo ($project->project_type == '1' ? '' : '/ Hour')?> </td>
+                  <!-- <td>{{$project->estimatedHours($project)}}</td>
+                  <td>{{$project->loggedHours($project)}}</td> -->
                   <td>
                               <?php if($project->project_status == 0): ?>
                                  <label class="btn btn-secondary">To-do</label>

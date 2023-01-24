@@ -5,7 +5,7 @@
    <h1 class="h3 mb-0 text-gray-800">{{ $task->project()->first()->toArray()['project_name'] }} - <small>Manage - {{ $task->title }}</small></h1>
 </div>
 <div class="mb-4">
-   <a href="{{ url()->previous() }}" style="text-decoration:none;">&#8592; Go Back</a>
+   <a href="{{ url('projects') }}/{{ $task->project()->first()->toArray()['id'] }}" style="text-decoration:none;">&#8592; Go Back</a>
 </div>
 <div class="row">
    <div class="col-lg-12">

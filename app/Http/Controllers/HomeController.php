@@ -38,25 +38,27 @@ class HomeController extends Controller {
             $stores = Store::count();
             $categories = Category::count();
             $projects = Project::count();
+            $store = Store::where('user_id', '<>', Auth::user()->id)->orderByDesc('id')->get()->first();
             return view(
-                'adminhome', 
+                'adminhome',
                 [
                     'timenow' => Carbon::now()->toFormattedDateString(),
-                    'users' => $users, 
-                    'roles' => $roles, 
-                    'contacts' => $contacts, 
+                    'users' => $users,
+                    'roles' => $roles,
+                    'contacts' => $contacts,
                     'permissions' => $permissions,
                     'stores' => $stores,
                     'categories' => $categories,
                     'projects' => $projects,
+                    'store' => (!empty($store) ? $store : '')
                 ]
-            );  
+            );
         else:
             $projects = Project::where('client_user_id', Auth::user()->id)->orderByDesc('id')->count();
             $store = Store::where('user_id', '<>', Auth::user()->id)->orderByDesc('id')->get()->first();
-            
+
             // dd($store);
-            
+
             return view(
                 'userhome',
                 [

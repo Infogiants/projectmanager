@@ -120,7 +120,7 @@
             <div class="row">
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h3>About {{ config('app.name', 'MyProjects') }}</h3>
-                    <p>MyProjects enables individual or small to medium business to mange their projects and clients online to help their business and customers.</p>
+                    <p>{{ config('app.name', 'MyProjects') }} enables individual or small to medium business to mange their projects and clients online to help their business and customers.</p>
                     <p class="social">
                         <a href="#"><span class="icofont-twitter"></span></a>
                         <a href="#"><span class="icofont-facebook"></span></a>

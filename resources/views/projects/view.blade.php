@@ -13,6 +13,7 @@
                         <label class="btn-sm btn-success">Completed</label>
                         <?php endif; ?>
 </h1>
+<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download Report</a>
 </div>
 <div class="mb-4">
    <a href="{{ url('projects') }}" style="text-decoration:none;">&#8592; Go Back</a>
@@ -65,6 +66,12 @@
                         <label class="mb-1" for="inputUsername"><strong>Client:</strong> <a href="{{ route('users.show',$project->client_user_id)}}">{{ $project->client()->first()->toArray()['name'] }} - {{ $project->client()->first()->toArray()['email'] }}</a></label>
                      </div>
                      <?php endif;?>
+                     <div class="form-group">
+                        <label class="mb-1" for="inputUsername"><strong>Total Estimater Hours:</strong> {{ $project->estimatedHours($project)}}</label>
+                     </div>
+                     <div class="form-group">
+                        <label class="mb-1" for="inputUsername"><strong>Total Logged Hours:</strong> {{ $project->loggedHours($project)}}</label>
+                     </div>
                   </div>
                   <div class="col lg-12">
                       <div class="form-group">
@@ -214,6 +221,7 @@
                            <th>Title</th>
                            <th>Status</th>
                            <th>Estimated Hours</th>
+                           <th>Logged Hours</th>
                            <th>Created By</th>
                            <th colspan="3">Actions</th>
                         </tr>
@@ -235,6 +243,7 @@
                               <?php endif; ?>
                            </td>
                            <td>{{$task->estimated_hours}}</td>
+                           <td>{{ $task->loggedEfforts($task) }}</td>
                            <td>{{ $task->user()->first()->toArray()['name'] }}</td>
                            <?php if (Auth::user()->id === $task->user_id): ?>
                            <td>

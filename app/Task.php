@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Effort;
 
 class Task extends Model
 {
@@ -23,5 +24,19 @@ class Task extends Model
     public function project()
     {
         return $this->hasOne('App\Project', 'id', 'project_id');
+    }
+
+    public function efforts()
+    {
+        return $this->hasMany('App\Effort', 'id', 'project_id');
+    }
+    public function loggedEfforts($task)
+    {
+        $effortHours = Effort::where([
+            ['project_id', '=', $task->project_id],
+            ['user_id', '=', $task->user_id],
+            ['task_id', '=', $task->id]
+        ])->sum('hour');
+        return $effortHours;
     }
 }
