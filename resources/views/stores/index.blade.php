@@ -31,7 +31,6 @@
          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                <tr>
-                  <th>ID</th>
                   <th>Store Logo</th>
                   <th>Store Name</th>
                   <th>Store Website</th>
@@ -43,7 +42,6 @@
             <tbody>
                @forelse($stores as $store)
                <tr>
-                  <td>{{$store->id}}</td>
                   <td>
                      @empty($store->store_logo)
                         <img src="{{ '/demo_images/shop_black.png' }}" width="32" height="32">

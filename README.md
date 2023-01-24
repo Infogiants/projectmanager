@@ -4,11 +4,11 @@
 
 ## About Application
 
-It's project manager web application for manging projects, clients, tasks etc for individual to small business. It's Developed using Laravel v7.15.0. 
+It's project manager web application for manging projects, clients, tasks etc for individual to small business. It's Developed using Laravel v7.15.0.
 
 ###### Completed
 
-- User/Client Login Module 
+- User/Client Login Module
 - Admin Contacts Management Module
 - Admin User Management Module
 - Admin Role View Module
@@ -27,17 +27,19 @@ It's project manager web application for manging projects, clients, tasks etc fo
 
 ###### To-do
 
+- Billing module in project view page - Billed hours listing with meta
+- Project server instance module in project view page - Add url, user/pwd, instance uat/prod fields
 - Customer Notification Management Module
 - Announcement/Blog/News Management Module
 - Support and Contact Module
 
-###### Summary of completed modules 
+###### Summary of completed modules
 
 Two differenet roles Admin/User will automatically added in system and both Admin and User have differnet dashboard according to assiged permissions in roles. Admin can add client users by email and assign them to projects.
 
 ## Installation Procedure
 
-Pull Latest code: 
+Pull Latest code:
 
 `https://github.com/lpkapil/projectmanager.git`
 
@@ -84,7 +86,7 @@ Pull Latest code:
 
 ## Login Details
 
-#### Admin #### 
+#### Admin ####
 
 Username: admin@example.com
 Password: admin
@@ -100,4 +102,4 @@ Coming soon...
 
 ## Donate and Support
 
-<div class='pm-button'><a href='https://www.payumoney.com/paybypayumoney/#/3FF0BB83F2A6D7DD27A53BC12E4AE109' target="_blank"><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/21.png' /></a></div> 
+<div class='pm-button'><a href='https://www.payumoney.com/paybypayumoney/#/3FF0BB83F2A6D7DD27A53BC12E4AE109' target="_blank"><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/21.png' /></a></div>
