@@ -21,7 +21,9 @@
 
         @if(session()->get('errors'))
         <div class="alert alert-danger">
-            {{ session()->get('errors') }}
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br/>
+            @endforeach
         </div>
         @endif
     </div>
