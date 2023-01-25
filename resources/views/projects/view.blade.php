@@ -56,9 +56,6 @@
                      <div class="form-group">
                         <label class="mb-1" for="inputUsername"><strong>Total Logged Hours:</strong> {{ $project->loggedHours($project)}}</label>
                      </div>
-                     <div class="form-group">
-                        <label class="mb-1" for="inputUsername"><strong>Total Billing:</strong> {{ $project->loggedHours($project) * $project->project_price }} {{ $project->project_currency }}</label>
-                     </div>
                   </div>
                   <div class="col-lg-6">
                      <div class="form-group">
