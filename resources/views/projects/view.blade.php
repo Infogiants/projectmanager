@@ -473,7 +473,7 @@
                            <td>{{ $document->user()->first()->toArray()['name'] }}</td>
                            <?php if (Auth::user()->id === $document->user_id): ?>
                            <td>
-                              <a href="{{ '/storage/documents/'.$document->url }}" class="btn btn-primary" target="_blank">Download</a>
+                              <a href="{{ '/storage/documents/'.$document->url }}" class="btn btn-primary" download>Download</a>
                            </td>
                            <td>
                               <form action="{{ route('documents.destroy', $document->id)}}" method="post">
@@ -484,7 +484,7 @@
                            </td>
                            <?php else: ?>
                            <td colspan="2">
-                              <a href="{{ '/storage/documents/'.$document->url }}" class="btn btn-primary" target="_blank">Download</a>
+                              <a href="{{ '/storage/documents/'.$document->url }}" class="btn btn-primary" download>Download</a>
                            </td>
                            <?php endif;?>
                         </tr>
