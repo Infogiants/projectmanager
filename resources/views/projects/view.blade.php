@@ -167,6 +167,68 @@
    <div class="col-lg-12">
       <div class="card shadow mb-4">
          <!-- Card Header - Accordion -->
+         <a href="#project_billing" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-primary">Project Billing</h6>
+         </a>
+         <!-- Card Content - Collapse -->
+         <div class="collapse show" id="project_billing" style="">
+            <div class="card-body">
+               <div class="row">
+                  <div class="col-lg-4">
+                     <div class="card mb-4 border-left-primary">
+                        <div class="card-body">
+                           <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Amount</div>
+                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $project->loggedHours($project) * $project->project_price }} {{ $project->project_currency }}</div>
+                              </div>
+                              <div class="col-auto">
+                                 <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
+                              </div>
+                           </div>
+                        </div>
+                        </div>
+                     </div>
+                     <div class="col-lg-4">
+                        <div class="card mb-4 border-left-warning">
+                           <div class="card-body">
+                              <div class="row no-gutters align-items-center">
+                                 <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pending Amount</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                 </div>
+                                 <div class="col-auto">
+                                    <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-lg-4">
+                        <div class="card mb-4 border-left-success">
+                           <div class="card-body">
+                              <div class="row no-gutters align-items-center">
+                                 <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Paid Amount</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                 </div>
+                                 <div class="col-auto">
+                                    <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="row">
+   <div class="col-lg-12">
+      <div class="card shadow mb-4">
+         <!-- Card Header - Accordion -->
          <a href="#project_tasks" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
             <h6 class="m-0 font-weight-bold text-primary">Project Tasks ({{ $all }})</h6>
          </a>
@@ -349,223 +411,4 @@
       </div>
    </div>
 </div>
-<div class="row">
-   <div class="col-lg-12">
-      <div class="card shadow mb-4">
-         <!-- Card Header - Accordion -->
-         <a href="#project_billing" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-            <h6 class="m-0 font-weight-bold text-primary">Project Billing</h6>
-         </a>
-         <!-- Card Content - Collapse -->
-         <div class="collapse show" id="project_billing" style="">
-            <div class="card-body">
-               <div class="row">
-                  <div class="col-lg-4">
-                     <div class="card mb-4 border-left-primary">
-                        <div class="card-body">
-                           <div class="row no-gutters align-items-center">
-                              <div class="col mr-2">
-                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Amount</div>
-                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $project->loggedHours($project) * $project->project_price }} {{ $project->project_currency }}</div>
-                              </div>
-                              <div class="col-auto">
-                                 <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
-                              </div>
-                           </div>
-                        </div>
-                        </div>
-                     </div>
-                     <div class="col-lg-4">
-                        <div class="card mb-4 border-left-warning">
-                           <div class="card-body">
-                              <div class="row no-gutters align-items-center">
-                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pending Amount</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                 </div>
-                                 <div class="col-auto">
-                                    <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-lg-4">
-                        <div class="card mb-4 border-left-success">
-                           <div class="card-body">
-                              <div class="row no-gutters align-items-center">
-                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Paid Amount</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                 </div>
-                                 <div class="col-auto">
-                                    <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-               </div>
-               <div class="row">
-                  <div class="col-lg-6">
-                     <div class="card shadow">
-                        <div class="card-header py-3">
-                           <h6 class="m-0 font-weight-bold text-primary">Payment Guide and Test Data</h6>
-                        </div>
-                        <div class="card-body">
-                           <p>We are ussing Stripe payment gateway for the payments.</p>
-                           <p>Visa Card No: 4242424242424242</p>
-                           <p>CVC: Any 3 digits (four digits for American Express cards).</p>
-                           <p>Expiration Date: Any future date</p>
-                           <p>More Details: <a href="https://stripe.com/docs/testing?testing-method=card-numbers" target="_blank">Testing Stripe Documentation</a></p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-6">
-                     <div class="card shadow mb-4">
-                        <div class="card-header">Make Payment</div>
-                        <div class="card-body">
-                           <form role="form" action="{{ route('payment') }}" method="post" class="validation"
-                                 data-cc-on-file="false"
-                                 data-stripe-publishable-key="{{ config('stripe.api_keys.stripe_key')}}"
-                                 id="payment-form">
-                                       @csrf
-                                       <div class="row">
-                                          <div class="col">
-                                             <div class='form-group required'>
-                                                <label class='control-label'>Name on Card</label>
-                                                <input  class='form-control' size='4' type='text'>
-                                             </div>
-                                          </div>
-                                          <div class="col">
-                                             <div class='form-group cc required'>
-                                                <label class='control-label'>Card Number</label>
-                                                <input autocomplete='off' class='form-control card-num' size='20' type='text'>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="row">
-                                          <div class="col">
-                                             <div class='form-group cvc required'>
-                                                <label class='control-label'>CVC</label>
-                                                <input autocomplete='off' class='form-control card-cvc' placeholder='e.g 415' size='4' type='text'>
-                                             </div>
-                                          </div>
-                                          <div class="col">
-                                             <div class='form-group expiration required'>
-                                                <label class='control-label'>Expiration Month</label>
-                                                <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
-                                             </div>
-                                          </div>
-                                          <div class="col">
-                                             <div class='form-group expiration required'>
-                                                <label class='control-label'>Expiration Year</label>
-                                                <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class='hide errorDiv form-group'>
-                                          <p class="alert alert-danger">Fix the errors before you begin.</p>
-                                       </div>
-                                       <div>
-                                          <button class="btn btn-secondary  btn" type="reset"><i class="fa-undo fa-xs fa text-gray-300"></i> Reset</button>
-                                          <button class="btn btn-primary btn" type="submit">Pay Now</button>
-                                       </div>
-                           </form>
-                        </div>
-                  </div>
-               </div>
-               <div class="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                     <thead>
-                        <tr>
-                           <th>ID</th>
-                           <th>Payment ID</th>
-                           <th>Payment Amount</th>
-                           <th>Payment Status</th>
-                           <th>Payment Date</th>
-                           <th colspan="2">Actions</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @forelse($tasks as $task)
-                        <tr>
-                           <td>{{$task->id}}</td>
-                           <td>{{$task->title}}</td>
-                           <td>{{$task->title}}</td>
-                           <td>{{$task->estimated_hours}}</td>
-                           <td>{{ $task->loggedEfforts($task) }}</td>
-                           <td colspan="2">
-                              <a href="{{ route('tasks.show',$task->id)}}" class="btn btn-primary">Request Refund</a>
-                           </td>
-                        </tr>
-                        @empty
-                           <tr>
-                              <td colspan="8" class="text-center">No tasks found</td>
-                           </tr>
-                        @endforelse
-                     </tbody>
-                  </table>
-                  {{ $tasks->appends(request()->except('taskpage'))->links() }}
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<style type="text/css">
-.hide {
-    display: none;
-}
-</style>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-   $(function() {
-       var $form = $(".validation");
-       $('form.validation').bind('submit', function(e) {
-           var $form = $(".validation"),
-           inputVal = ['input[type=text]'].join(', '),
-           $inputs       = $form.find('.required').find(inputVal),
-           $errorStatus  = $form.find('div.errorDiv'),
-           valid         = true;
-           $errorStatus.addClass('hide');
-
-           $('.has-error').removeClass('has-error');
-            $inputs.each(function(i, el) {
-                var $input = $(el);
-                if ($input.val() === '') {
-                $input.parent().addClass('has-error');
-                $errorStatus.removeClass('hide');
-                e.preventDefault();
-            }
-       });
-
-       if (!$form.data('cc-on-file')) {
-         e.preventDefault();
-         Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-         Stripe.createToken({
-           number: $('.card-num').val(),
-           cvc: $('.card-cvc').val(),
-           exp_month: $('.card-expiry-month').val(),
-           exp_year: $('.card-expiry-year').val()
-         }, stripeHandleResponse);
-       }
-
-     });
-
-    function stripeHandleResponse(status, response) {
-            console.log(response);
-           if (response.error) {
-               $('.errorDiv').removeClass('hide').find('.alert').text(response.error.message);
-           } else {
-               var token = response['id'];
-               $form.find('input[type=text]').empty();
-               $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-               $form.get(0).submit();
-           }
-    }
-
-   });
-</script>
 @endsection
