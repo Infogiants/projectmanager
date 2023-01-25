@@ -51,6 +51,9 @@
                         <label class="mb-1" for="inputUsername"><strong>Price:</strong> {{ $project->project_price }} {{ $project->project_currency }} <?php echo ($project->project_type == '1') ? '' : '/ Hour'; ?></label>
                      </div>
                      <div class="form-group">
+                        <label class="mb-1" for="inputUsername"><strong>Project Type:</strong><?php echo ($project->project_type == '1') ? 'Fixed Price' : 'Hourly'; ?></label>
+                     </div>
+                     <div class="form-group">
                         <label class="mb-1" for="inputUsername"><strong>Total Estimated Hours:</strong> {{ $project->estimatedHours($project)}}</label>
                      </div>
                      <div class="form-group">
@@ -177,7 +180,13 @@
                            <div class="row no-gutters align-items-center">
                               <div class="col mr-2">
                                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Amount</div>
-                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $project->loggedHours($project) * $project->project_price }} {{ $project->project_currency }}</div>
+                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <?php if($project->project_type == '0'): ?>
+                                       {{ $project->loggedHours($project) * $project->project_price }} {{ $project->project_currency }}
+                                    <?php else: ?>
+                                       {{ $project->project_price }} {{ $project->project_currency }}
+                                    <?php endif; ?>
+                                 </div>
                               </div>
                               <div class="col-auto">
                                  <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -192,7 +201,13 @@
                               <div class="row no-gutters align-items-center">
                                  <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pending Amount</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $project->loggedHours($project) * $project->project_price - $project->paidBillingAmount($project) }} {{ $project->project_currency }}</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                       <?php if($project->project_type == '0'): ?>
+                                          {{ $project->loggedHours($project) * $project->project_price - $project->paidBillingAmount($project) }} {{ $project->project_currency }}
+                                       <?php else: ?>
+                                          {{ $project->project_price - $project->paidBillingAmount($project) }} {{ $project->project_currency }}
+                                       <?php endif; ?>
+                                    </div>
                                  </div>
                                  <div class="col-auto">
                                     <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -207,7 +222,9 @@
                               <div class="row no-gutters align-items-center">
                                  <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Paid Amount</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $project->paidBillingAmount($project) }} {{ $project->project_currency }}</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                       {{ $project->paidBillingAmount($project) }} {{ $project->project_currency }}
+                                    </div>
                                  </div>
                                  <div class="col-auto">
                                     <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -218,10 +235,7 @@
                      </div>
                </div>
                <?php if (
-                  in_array('admin', Auth::user()->roles->pluck('slug')->toArray())
-                  && $project->loggedHours($project) * $project->project_price > 0
-                  && $project->paidBillingAmount($project) != $project->loggedHours($project) * $project->project_price
-                  ):
+                  in_array('admin', Auth::user()->roles->pluck('slug')->toArray())):
                ?>
                <div>
                   <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#addbillingform" aria-expanded="false" aria-controls="addbillingform">
@@ -248,7 +262,6 @@
                            <label for="summary">Summary:</label>
                            <textarea name="summary" class="form-control {{ $errors->has('summary') ? 'is-invalid' : '' }}" rows="3" tabindex="4">{{ old('summary') }}</textarea>
                         </div>
-                        <input type="hidden" name="pending_hours" value="<?php echo $project->loggedHours($project) * $project->project_price - $project->paidBillingAmount($project); ?>" />
                         <input type="hidden" name="project_id" value="<?php echo $project->id; ?>" />
                         <button type="submit" class="btn btn-primary float-right mb-4" tabindex="4">Save</button>
                      </form>

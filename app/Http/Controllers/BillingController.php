@@ -59,12 +59,12 @@ class BillingController extends Controller
             'file' => 'required|file|max:5000|mimes:jpeg,png,jpg,pdf,docx,doc'
         ], $messages);
 
-        if ($request->get('amount') > $request->get('pending_hours')) {
-            // Empty data and rules
-            $vd = Validator::make([], []);
-            $validator->errors()->add('amount', 'Invalid settlement amount');
-            return redirect('projects/'.$request->get('project_id'))->withErrors($validator);
-        }
+        // if ($request->get('amount') > $request->get('pending_hours')) {
+        //     // Empty data and rules
+        //     $vd = Validator::make([], []);
+        //     $validator->errors()->add('amount', 'Invalid settlement amount');
+        //     return redirect('projects/'.$request->get('project_id'))->withErrors($validator);
+        // }
 
         if ($validator->fails()) {
             return redirect('projects/'.$request->get('project_id'))->withErrors($validator);
