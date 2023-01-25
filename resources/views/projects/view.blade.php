@@ -48,30 +48,30 @@
                         <label class="mb-1" for="inputUsername"><strong>Name:</strong> {{ $project->project_name }}</label>
                      </div>
                      <div class="form-group">
-                        <label class="mb-1" for="inputUsername"><strong>Price:</strong> {{ $project->project_price }} {{ $project->project_currency }} </label>
+                        <label class="mb-1" for="inputUsername"><strong>Price:</strong> {{ $project->project_price }} {{ $project->project_currency }} <?php echo ($project->project_type == '1') ? '' : '/ Hour'; ?></label>
                      </div>
                      <div class="form-group">
-                        <label class="mb-0" for="inputUsername"><strong>Start Date:</strong> {{  \Carbon\Carbon::parse($project->project_start_date)->format('F j, Y') }}</label>
+                        <label class="mb-1" for="inputUsername"><strong>Total Estimated Hours:</strong> {{ $project->estimatedHours($project)}}</label>
                      </div>
                      <div class="form-group">
-                        <label class="mb-1" for="inputUsername"><strong>End Date:</strong> {{ $project->project_end_date }}</label>
+                        <label class="mb-1" for="inputUsername"><strong>Total Logged Hours:</strong> {{ $project->loggedHours($project)}}</label>
+                     </div>
+                     <div class="form-group">
+                        <label class="mb-1" for="inputUsername"><strong>Total Billing:</strong> {{ $project->loggedHours($project) * $project->project_price }} {{ $project->project_currency }}</label>
                      </div>
                   </div>
                   <div class="col-lg-6">
                      <div class="form-group">
-                        <label class="mb-1" for="inputUsername"><strong>Type:</strong> <?php echo ($project->project_type == '1') ? 'Fixed Price' : 'Hourly Price'; ?></label>
+                        <label class="mb-0" for="inputUsername"><strong>Start Date:</strong> {{  \Carbon\Carbon::parse($project->project_start_date)->format('F j, Y') }}</label>
+                     </div>
+                     <div class="form-group">
+                        <label class="mb-1" for="inputUsername"><strong>End Date:</strong> {{  \Carbon\Carbon::parse($project->project_end_date)->format('F j, Y') }}</label>
                      </div>
                      <?php if (in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
                      <div class="form-group">
                         <label class="mb-1" for="inputUsername"><strong>Client:</strong> <a href="{{ route('users.show',$project->client_user_id)}}">{{ $project->client()->first()->toArray()['name'] }} - {{ $project->client()->first()->toArray()['email'] }}</a></label>
                      </div>
                      <?php endif;?>
-                     <div class="form-group">
-                        <label class="mb-1" for="inputUsername"><strong>Total Estimater Hours:</strong> {{ $project->estimatedHours($project)}}</label>
-                     </div>
-                     <div class="form-group">
-                        <label class="mb-1" for="inputUsername"><strong>Total Logged Hours:</strong> {{ $project->loggedHours($project)}}</label>
-                     </div>
                   </div>
                   <div class="col lg-12">
                       <div class="form-group">
