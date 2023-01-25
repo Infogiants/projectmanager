@@ -373,35 +373,55 @@
                               </div>
                            </div>
                         </div>
+                        </div>
                      </div>
-                     <div class="card mb-4 border-left-warning">
-                        <div class="card-body">
-                           <div class="row no-gutters align-items-center">
-                              <div class="col mr-2">
-                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pending Amount</div>
-                                 <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                              </div>
-                              <div class="col-auto">
-                                 <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
+                     <div class="col-lg-4">
+                        <div class="card mb-4 border-left-warning">
+                           <div class="card-body">
+                              <div class="row no-gutters align-items-center">
+                                 <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pending Amount</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                 </div>
+                                 <div class="col-auto">
+                                    <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
+                                 </div>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="card mb-4 border-left-success">
-                        <div class="card-body">
-                           <div class="row no-gutters align-items-center">
-                              <div class="col mr-2">
-                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Paid Amount</div>
-                                 <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                              </div>
-                              <div class="col-auto">
-                                 <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
+                     <div class="col-lg-4">
+                        <div class="card mb-4 border-left-success">
+                           <div class="card-body">
+                              <div class="row no-gutters align-items-center">
+                                 <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Paid Amount</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                 </div>
+                                 <div class="col-auto">
+                                    <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
+                                 </div>
                               </div>
                            </div>
+                        </div>
+                     </div>
+               </div>
+               <div class="row">
+                  <div class="col-lg-6">
+                     <div class="card shadow">
+                        <div class="card-header py-3">
+                           <h6 class="m-0 font-weight-bold text-primary">Payment Guide and Test Data</h6>
+                        </div>
+                        <div class="card-body">
+                           <p>We are ussing Stripe payment gateway for the payments.</p>
+                           <p>Visa Card No: 4242424242424242</p>
+                           <p>CVC: Any 3 digits (four digits for American Express cards).</p>
+                           <p>Expiration Date: Any future date</p>
+                           <p>More Details: <a href="https://stripe.com/docs/testing?testing-method=card-numbers" target="_blank">Testing Stripe Documentation</a></p>
                         </div>
                      </div>
                   </div>
-                  <div class="col-lg-8">
+                  <div class="col-lg-6">
                      <div class="card shadow mb-4">
                         <div class="card-header">Make Payment</div>
                         <div class="card-body">
@@ -448,7 +468,8 @@
                                           <p class="alert alert-danger">Fix the errors before you begin.</p>
                                        </div>
                                        <div>
-                                          <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now</button>
+                                          <button class="btn btn-secondary  btn" type="reset"><i class="fa-undo fa-xs fa text-gray-300"></i> Reset</button>
+                                          <button class="btn btn-primary btn" type="submit">Pay Now</button>
                                        </div>
                            </form>
                         </div>

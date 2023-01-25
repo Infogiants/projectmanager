@@ -12,7 +12,7 @@ class PaymentController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
-        $this->middleware('role:admin');
+        $this->middleware('role:admin,user');
     }
 
 
