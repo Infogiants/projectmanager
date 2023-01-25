@@ -7,6 +7,7 @@ use App\Task;
 use App\Document;
 use App\Category;
 use App\User;
+use App\Billing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -127,7 +128,10 @@ class ProjectController extends Controller
             //documents
             $documents = Document::where([['project_id', '=', $project->id],['task_id', '=', null]])->orderByDesc('id')->paginate(4,['*'],'documentpage');
             $alldocuments = Document::where([['project_id', '=', $project->id],['task_id', '=', null]])->count();
-            return view('projects.view', compact('project', 'tasks', 'all', 'todo', 'inprogress', 'completed', 'documents', 'alldocuments'));
+
+            //billing settlements
+            $billings = Billing::where([['project_id', '=', $project->id]])->orderByDesc('id')->paginate(4,['*'],'billingpage');
+            return view('projects.view', compact('project', 'tasks', 'all', 'todo', 'inprogress', 'completed', 'documents', 'alldocuments', 'billings'));
         } else {
             return redirect('/projects')->with('errors', 'Invalid project to view!');
         }

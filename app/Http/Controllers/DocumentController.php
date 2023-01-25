@@ -37,7 +37,7 @@ class DocumentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         return view('documents.create');
     }
 
@@ -48,7 +48,7 @@ class DocumentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $messages = [
             'mimes' => 'Supported file format for :attribute are jpeg,png,jpg,pdf,docx,doc,txt',
         ];
@@ -62,12 +62,12 @@ class DocumentController extends Controller
                 return redirect('projects/'.$request->get('project_id'))->withErrors($validator);
             } else {
                 return redirect('tasks/'.$request->get('task_id'))->withErrors($validator);
-            }    
+            }
         }
 
         $request->file('file')->store('public/documents');
         $fileName = $request->file('file')->hashName();
-        
+
         Document::create([
             'project_id' => $request->get('project_id'),
             'task_id' => $request->get('task_id') ? $request->get('task_id') : null,
@@ -77,11 +77,11 @@ class DocumentController extends Controller
             'url' => $fileName,
             'user_id' => Auth::user()->id
         ]);
-        
+
         if(empty($request->get('task_id'))) {
-            return redirect('/projects/'.$request->get('project_id'))->with('success', 'Document uploaded successfully!');;
+            return redirect('/projects/'.$request->get('project_id'))->with('success', 'Document uploaded successfully!');
         } else {
-            return redirect('/tasks/'.$request->get('task_id'))->with('success', 'Document uploaded successfully!');;
+            return redirect('/tasks/'.$request->get('task_id'))->with('success', 'Document uploaded successfully!');
         }
     }
 

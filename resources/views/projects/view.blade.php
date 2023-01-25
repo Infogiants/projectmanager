@@ -192,7 +192,7 @@
                               <div class="row no-gutters align-items-center">
                                  <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pending Amount</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $project->loggedHours($project) * $project->project_price - $project->paidBillingAmount($project) }} {{ $project->project_currency }}</div>
                                  </div>
                                  <div class="col-auto">
                                     <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -207,7 +207,7 @@
                               <div class="row no-gutters align-items-center">
                                  <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Paid Amount</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $project->paidBillingAmount($project) }} {{ $project->project_currency }}</div>
                                  </div>
                                  <div class="col-auto">
                                     <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>
@@ -216,6 +216,87 @@
                            </div>
                         </div>
                      </div>
+               </div>
+               <?php if (
+                  in_array('admin', Auth::user()->roles->pluck('slug')->toArray())
+                  && $project->loggedHours($project) * $project->project_price > 0
+                  && $project->paidBillingAmount($project) != $project->loggedHours($project) * $project->project_price
+                  ):
+               ?>
+               <div>
+                  <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#addbillingform" aria-expanded="false" aria-controls="addbillingform">
+                     <i class="fa fa-plus" aria-hidden="true"></i> Add Settlement
+                  </button>
+                  <div class="collapse" id="addbillingform">
+                     <form method="post" action="{{ route('billings.store') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                           <div class="col">
+                              <div class="form-group">
+                                 <label for="amount">Amount in ({{ $project->project_currency }})</label>
+                                 <input type="number" min="0" class="form-control {{ $errors->has('amount') ? 'is-invalid' : '' }}" name="amount" value="{{ old('amount') }}" title="Add settlement amount" />
+                              </div>
+                           </div>
+                        </div>
+                        <div class="input-group mb-4">
+                           <div class="custom-file">
+                              <input type="file" class="custom-file-input  {{ $errors->has('file') ? 'is-invalid' : '' }}" name="file" value="{{ old('file') }}" id="inputGroupFile04">
+                              <label class="custom-file-label" for="inputGroupFile04">Attach proof document</label>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label for="summary">Summary:</label>
+                           <textarea name="summary" class="form-control {{ $errors->has('summary') ? 'is-invalid' : '' }}" rows="3" tabindex="4">{{ old('summary') }}</textarea>
+                        </div>
+                        <input type="hidden" name="pending_hours" value="<?php echo $project->loggedHours($project) * $project->project_price - $project->paidBillingAmount($project); ?>" />
+                        <input type="hidden" name="project_id" value="<?php echo $project->id; ?>" />
+                        <button type="submit" class="btn btn-primary float-right mb-4" tabindex="4">Save</button>
+                     </form>
+                  </div>
+               </div>
+               <?php endif; ?>
+               <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                     <thead>
+                        <tr>
+                           <th>ID</th>
+                           <th>Summary</th>
+                           <th>Amount</th>
+                           <th>Proof Attached</th>
+                           <th>Created at</th>
+                           <?php if (in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
+                           <th>Actions</th>
+                           <?php endif; ?>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        @forelse($billings as $billing)
+                        <tr>
+                           <td>{{$billing->id}}</td>
+                           <td>{{$billing->summary}}</td>
+                           <td>{{$billing->amount}} {{ $project->project_currency }}</td>
+                           <td>
+                              <a href="{{ '/storage/documents/'.$billing->doc_url }}" class="btn btn-primary" download>Download</a>
+                           </td>
+                           <td>{{  \Carbon\Carbon::parse($billing->created_at)->format('F j, Y') }}</td>
+                           <?php if (Auth::user()->id === $billing->user_id): ?>
+                           <td>
+                              <form action="{{ route('billings.destroy', $billing->id)}}" method="post">
+                                 @csrf
+                                 @method('DELETE')
+                                 <button class="btn btn-danger" type="submit">Delete</button>
+                              </form>
+                           </td>
+                           <?php endif; ?>
+                        </tr>
+                        @empty
+                           <tr>
+                              <td colspan="8" class="text-center">No billing settlement records found</td>
+                           </tr>
+                        @endforelse
+                     </tbody>
+                  </table>
+                  {{ $billings->appends(request()->except('billingpage'))->links() }}
                </div>
             </div>
          </div>

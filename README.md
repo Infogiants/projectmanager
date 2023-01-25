@@ -22,22 +22,19 @@ It's project manager web application for manging projects, clients, tasks etc fo
 
 ###### In-Progress
 
-- Bug fixing in existing features and testing
+- Bug fixing in existing features
 - Project Billing Module
+- Refactor for fixed price project type, hourly handled
 
 ###### To-do
 
-- Billing module in project view page - Billed hours listing with meta
 - Project server instance module in project view page - Add url, user/pwd, instance uat/prod fields
 - Customer Notification Management Module
-- Announcement/Blog/News Management Module
-- Support and Contact Module
 - Email notification for task/project update
-- Account Setting modules for clients - Email notification, Alerts notification
-- Payment history and refund module for billing
+- Account Setting modules - Email notification, Alerts notification
 - My Profile page for clients/admin
-- Need Help page for client
-- Help/FAQ module for admin
+- Help & FAQ module admin
+- Help & FAQ client page
 
 ###### Summary of completed modules
 

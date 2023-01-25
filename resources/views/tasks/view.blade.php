@@ -151,7 +151,7 @@
       <div class="card shadow mb-4">
          <!-- Card Header - Accordion -->
          <a href="#task_efforts" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-            <h6 class="m-0 font-weight-bold text-primary">Total Efforts - ({{ $all }} Hours)</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Total Logged Hours - ({{ $all }} Hours)</h6>
          </a>
          <!-- Card Content - Collapse -->
          <div class="collapse show" id="task_efforts" style="">

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Task;
 use App\Effort;
+use App\Billing;
 
 class Project extends Model
 {
@@ -51,5 +52,13 @@ class Project extends Model
             ['user_id', '=', $project->user_id]
         ])->sum('hour');
         return $loggedHours;
+    }
+
+    public function paidBillingAmount($project) {
+        $paidAmount = Billing::where([
+            ['project_id', '=', $project->id],
+            ['user_id', '=', $project->user_id]
+        ])->sum('amount');
+        return $paidAmount;
     }
 }
