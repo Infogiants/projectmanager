@@ -33,8 +33,11 @@ It's project manager web application for manging projects, clients, tasks etc fo
 - Announcement/Blog/News Management Module
 - Support and Contact Module
 - Email notification for task/project update
-- Setting modules for clients - Email notification, Alerts notification
+- Account Setting modules for clients - Email notification, Alerts notification
 - Payment history and refund module for billing
+- My Profile page for clients/admin
+- Need Help page for client
+- Help/FAQ module for admin
 
 ###### Summary of completed modules
 
