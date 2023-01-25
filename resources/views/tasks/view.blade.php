@@ -145,7 +145,7 @@
       </div>
    </div>
 </div>
-
+<?php if (in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
 <div class="row">
    <div class="col-lg-12">
       <div class="card shadow mb-4">
@@ -224,6 +224,7 @@
       </div>
    </div>
 </div>
+<?php endif; ?>
 <div class="row">
    <div class="col-lg-12">
       <div class="card shadow mb-4">
