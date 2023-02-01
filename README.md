@@ -18,13 +18,12 @@ It's project manager web application for manging projects, clients, tasks etc fo
 - Project Tasks Management Module
 - Task Comments Management Module
 - Task Time Logging Module
+- Project Billing Module
 - Payment POC - Using Stripe Charge/Refund
 
 ###### In-Progress
 
 - Bug fixing in existing features
-- Project Billing Module
-- Refactor for fixed price project type, hourly handled
 
 ###### To-do
 
