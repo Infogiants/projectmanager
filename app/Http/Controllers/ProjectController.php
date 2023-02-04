@@ -8,6 +8,8 @@ use App\Document;
 use App\Category;
 use App\User;
 use App\Billing;
+use App\Environment;
+use App\ProjectEnvironment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -131,7 +133,30 @@ class ProjectController extends Controller
 
             //billing settlements
             $billings = Billing::where([['project_id', '=', $project->id]])->orderByDesc('id')->paginate(4,['*'],'billingpage');
-            return view('projects.view', compact('project', 'tasks', 'all', 'todo', 'inprogress', 'completed', 'documents', 'alldocuments', 'billings'));
+
+            //environments
+            $environments = Environment::all();
+
+            //project environment instances
+            $projectenvironments = ProjectEnvironment::where([['project_id', '=', $project->id]])->orderByDesc('id')->paginate(4,['*'],'prjenv');
+            $projectenvironmentscount = ProjectEnvironment::where([['project_id', '=', $project->id]])->count();
+            return view(
+                'projects.view',
+                compact(
+                    'project',
+                    'tasks',
+                    'all',
+                    'todo',
+                    'inprogress',
+                    'completed',
+                    'documents',
+                    'alldocuments',
+                    'billings',
+                    'environments',
+                    'projectenvironments',
+                    'projectenvironmentscount'
+                )
+            );
         } else {
             return redirect('/projects')->with('errors', 'Invalid project to view!');
         }

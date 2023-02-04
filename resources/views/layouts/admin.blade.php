@@ -46,16 +46,17 @@
                <span>Your Store</span></a>
             </li>
             <!-- Nav Item - Projects Collapse Menu -->
-            <li class="nav-item {{ (request()->is('projects*') || request()->is('categories*'))? 'active' : '' }}">
-               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProjects" aria-expanded="{{ (request()->is('projects*') || request()->is('categories*'))? 'true' : 'false' }}" aria-controls="collapseProjects">
+            <li class="nav-item {{ (request()->is('projects*') || request()->is('categories*') || request()->is('environments*'))? 'active' : '' }}">
+               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProjects" aria-expanded="{{ (request()->is('projects*') || request()->is('categories*')  || request()->is('environments*'))? 'true' : 'false' }}" aria-controls="collapseProjects">
                <i class="fas fa-fw fa-cubes"></i>
                <span>Projects</span>
                </a>
-               <div id="collapseProjects" class="collapse {{ (request()->is('projects*') || request()->is('categories*'))? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
+               <div id="collapseProjects" class="collapse {{ (request()->is('projects*') || request()->is('categories*')  || request()->is('environments*'))? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
                   <div class="bg-white py-2 collapse-inner rounded">
                   <h6 class="collapse-header">Projects:</h6>
                      <a class="collapse-item {{ (request()->is('projects*')) ? 'active' : '' }}" href="{{ url('/projects') }}">Projects</a>
                      <a class="collapse-item {{ (request()->is('categories*')) ? 'active' : '' }}" href="{{ url('/categories') }}">Categories</a>
+                     <a class="collapse-item {{ (request()->is('environments*')) ? 'active' : '' }}" href="{{ url('/environments') }}">Environments</a>
                   </div>
                </div>
             </li>

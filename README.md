@@ -20,6 +20,8 @@ It's project manager web application for manging projects, clients, tasks etc fo
 - Task Time Logging Module
 - Project Billing Module
 - Payment POC - Using Stripe Charge/Refund
+- Project Enviornments Module
+- Project Enviornments Instances Module
 
 ###### In-Progress
 
@@ -27,7 +29,6 @@ It's project manager web application for manging projects, clients, tasks etc fo
 
 ###### To-do
 
-- Project server instance module in project view page - Add url, user/pwd, instance uat/prod fields
 - Customer Notification Management Module
 - Email notification for task/project update
 - Account Setting modules - Email notification, Alerts notification

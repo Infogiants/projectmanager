@@ -502,4 +502,95 @@
       </div>
    </div>
 </div>
+<div class="row">
+   <div class="col-lg-12">
+      <div class="card shadow mb-4">
+         <!-- Card Header - Accordion -->
+         <a href="#project_instances" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-primary">Project Environment Instances ({{ $projectenvironmentscount }})</h6>
+         </a>
+         <!-- Card Content - Collapse -->
+         <div class="collapse show" id="project_instances" style="">
+            <div class="card-body mb-4">
+               <div>
+                  <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#addinstanceform" aria-expanded="false" aria-controls="addinstanceform">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Add Enviornment Instance
+                  </button>
+                  <div class="collapse" id="addinstanceform">
+                     <form method="post" action="{{ route('projectenvironments.store') }}">
+                        @csrf
+                        <div class="row">
+                           <div class="col">
+                              <div class="form-group">
+                                 <label for="environment_id">Environment</label>
+                                 <select class="form-control {{ $errors->has('environment_id') ? 'is-invalid' : '' }}" id="environment_id" name="environment_id" value="{{ old('environment_id') }}">
+                                       <option value="">Select Environment</option>
+                                       @foreach($environments as $environment)
+                                          <option value="{{$environment->id}}">{{$environment->name}}</option>
+                                       @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col">
+                              <div class="form-group">
+                                 <label for="url">URL:</label>
+                                 <input type="text" class="form-control {{ $errors->has('url') ? 'is-invalid' : '' }}" name="url" value="{{ old('url') }}" tabindex="2"/>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col">
+                              <div class="form-group">
+                                 <label for="username">Username:</label>
+                                 <input type="text" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}" name="username" value="{{ old('username') }}" tabindex="3"/>
+                              </div>
+                           </div>
+                           <div class="col">
+                              <div class="form-group">
+                                 <label for="password">Password:</label>
+                                 <input type="text" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" value="{{ old('password') }}" tabindex="4"/>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label for="summary">Summary:</label>
+                           <textarea name="summary" class="form-control {{ $errors->has('summary') ? 'is-invalid' : '' }}" rows="5" tabindex="4">{{ old('summary') }}</textarea>
+                        </div>
+                        <input type="hidden" name="project_id" value="<?php echo $project->id; ?>" />
+                        <button type="submit" class="btn btn-primary float-right mb-4" tabindex="4">Save</button>
+                     </form>
+                  </div>
+               </div>
+               <div class="table-responsive"></div>
+               @forelse($projectenvironments as $projectenvironment)
+               <div class="card mb-4 border-left-primary">
+                     <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                           <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{$projectenvironment->getEnviornment($projectenvironment->environment_id)}} <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>  </div>
+                              <div class="mb-1 font-weight-bold text-gray-800">Url: <a href="{{ $projectenvironment->url }}" target="_blank">{{ $projectenvironment->url }}</a></div>
+                              <div class="mb-1 font-weight-bold text-gray-800">Username: {{ $projectenvironment->username }}</div>
+                              <div class="mb-0 font-weight-bold text-gray-800">Password: {{ $projectenvironment->password }}</div>
+                              <div class="mb-0 font-weight-bold text-gray-800">Summary: {{ $projectenvironment->summary }}</div>
+                           </div>
+                           <?php if (in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
+                           <form action="{{ route('projectenvironments.destroy', $projectenvironment->id)}}" method="post">
+                                 @csrf
+                                 @method('DELETE')
+                                 <button class="btn btn-danger" type="submit">Delete</button>
+                           </form>
+                           <?php endif; ?>
+                        </div>
+                     </div>
+               </div>
+               @empty
+                  <div class="mb-0 text-center">No project environments found</div>
+               @endforelse
+
+               {{ $projectenvironments->appends(request()->except('prjenv'))->links() }}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
 @endsection
