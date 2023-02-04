@@ -48,7 +48,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Payment Test
     Route::get('/payment', 'PaymentController@index');
-    Route::post('/payment', 'PaymentController@payment')->name('payment');;
+    Route::post('/payment', 'PaymentController@payment')->name('payment');
+
+    //My profile
+    Route::get('/myprofile', 'MyProfileController@show')->name('myprofile');
+    Route::patch('/myprofile', 'MyProfileController@update')->name('saveprofile');
 });
 
 

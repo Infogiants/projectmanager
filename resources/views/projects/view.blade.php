@@ -512,55 +512,57 @@
          <!-- Card Content - Collapse -->
          <div class="collapse show" id="project_instances" style="">
             <div class="card-body mb-4">
-               <div>
-                  <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#addinstanceform" aria-expanded="false" aria-controls="addinstanceform">
-                  <i class="fa fa-plus" aria-hidden="true"></i> Add Enviornment Instance
-                  </button>
-                  <div class="collapse" id="addinstanceform">
-                     <form method="post" action="{{ route('projectenvironments.store') }}">
-                        @csrf
-                        <div class="row">
-                           <div class="col">
-                              <div class="form-group">
-                                 <label for="environment_id">Environment</label>
-                                 <select class="form-control {{ $errors->has('environment_id') ? 'is-invalid' : '' }}" id="environment_id" name="environment_id" value="{{ old('environment_id') }}">
-                                       <option value="">Select Environment</option>
-                                       @foreach($environments as $environment)
-                                          <option value="{{$environment->id}}">{{$environment->name}}</option>
-                                       @endforeach
-                                 </select>
+               <?php if (in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
+                  <div>
+                     <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#addinstanceform" aria-expanded="false" aria-controls="addinstanceform">
+                     <i class="fa fa-plus" aria-hidden="true"></i> Add Enviornment Instance
+                     </button>
+                     <div class="collapse" id="addinstanceform">
+                        <form method="post" action="{{ route('projectenvironments.store') }}">
+                           @csrf
+                           <div class="row">
+                              <div class="col">
+                                 <div class="form-group">
+                                    <label for="environment_id">Environment</label>
+                                    <select class="form-control {{ $errors->has('environment_id') ? 'is-invalid' : '' }}" id="environment_id" name="environment_id" value="{{ old('environment_id') }}">
+                                          <option value="">Select Environment</option>
+                                          @foreach($environments as $environment)
+                                             <option value="{{$environment->id}}">{{$environment->name}}</option>
+                                          @endforeach
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col">
+                                 <div class="form-group">
+                                    <label for="url">URL:</label>
+                                    <input type="text" class="form-control {{ $errors->has('url') ? 'is-invalid' : '' }}" name="url" value="{{ old('url') }}" tabindex="2"/>
+                                 </div>
                               </div>
                            </div>
-                           <div class="col">
-                              <div class="form-group">
-                                 <label for="url">URL:</label>
-                                 <input type="text" class="form-control {{ $errors->has('url') ? 'is-invalid' : '' }}" name="url" value="{{ old('url') }}" tabindex="2"/>
+                           <div class="row">
+                              <div class="col">
+                                 <div class="form-group">
+                                    <label for="username">Username:</label>
+                                    <input type="text" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}" name="username" value="{{ old('username') }}" tabindex="3"/>
+                                 </div>
+                              </div>
+                              <div class="col">
+                                 <div class="form-group">
+                                    <label for="password">Password:</label>
+                                    <input type="text" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" value="{{ old('password') }}" tabindex="4"/>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="row">
-                           <div class="col">
-                              <div class="form-group">
-                                 <label for="username">Username:</label>
-                                 <input type="text" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}" name="username" value="{{ old('username') }}" tabindex="3"/>
-                              </div>
+                           <div class="form-group">
+                              <label for="summary">Summary:</label>
+                              <textarea name="summary" class="form-control {{ $errors->has('summary') ? 'is-invalid' : '' }}" rows="5" tabindex="4">{{ old('summary') }}</textarea>
                            </div>
-                           <div class="col">
-                              <div class="form-group">
-                                 <label for="password">Password:</label>
-                                 <input type="text" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" value="{{ old('password') }}" tabindex="4"/>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <label for="summary">Summary:</label>
-                           <textarea name="summary" class="form-control {{ $errors->has('summary') ? 'is-invalid' : '' }}" rows="5" tabindex="4">{{ old('summary') }}</textarea>
-                        </div>
-                        <input type="hidden" name="project_id" value="<?php echo $project->id; ?>" />
-                        <button type="submit" class="btn btn-primary float-right mb-4" tabindex="4">Save</button>
-                     </form>
+                           <input type="hidden" name="project_id" value="<?php echo $project->id; ?>" />
+                           <button type="submit" class="btn btn-primary float-right mb-4" tabindex="4">Save</button>
+                        </form>
+                     </div>
                   </div>
-               </div>
+               <?php endif; ?>
                <div class="table-responsive"></div>
                @forelse($projectenvironments as $projectenvironment)
                <div class="card mb-4 border-left-primary">
