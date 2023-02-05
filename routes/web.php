@@ -53,6 +53,10 @@ Route::group(['middleware' => 'auth'], function () {
     //My profile
     Route::get('/myprofile', 'MyProfileController@show')->name('myprofile');
     Route::patch('/myprofile', 'MyProfileController@update')->name('saveprofile');
+
+    //Account Setting
+    Route::get('/accountsetting', 'AccountSettingController@show')->name('accountsetting');
+    Route::patch('/accountsetting', 'AccountSettingController@update')->name('saveaccountsetting');
 });
 
 

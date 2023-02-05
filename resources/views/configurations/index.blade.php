@@ -42,7 +42,7 @@
                   <td>{{$configuration->id}}</td>
                   <td>{{$configuration->name}}</td>
                   <td>{{$configuration->path}}</td>
-                  <td>&#8377; {{$configuration->value}}</td>
+                  <td>{{$configuration->value}}</td>
                   <td>{{$configuration->user_id}}</td>
                   <td>
                      <a href="{{ route('configurations.edit',$configuration->id)}}" class="btn btn-primary">Edit</a>

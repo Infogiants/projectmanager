@@ -22,19 +22,16 @@ It's project manager web application for manging projects, clients, tasks etc fo
 - Payment POC - Using Stripe Charge/Refund
 - Project Enviornments Module
 - Project Enviornments Instances Module
+- My Profile page for clients/admin
 
 ###### In-Progress
 
 - Bug fixing in existing features
+- Account Setting modules - Email notification, Alerts notification
 
 ###### To-do
 
-- Customer Notification Management Module
-- Email notification for task/project update
-- Account Setting modules - Email notification, Alerts notification
-- My Profile page for clients/admin
-- Help & FAQ module admin
-- Help & FAQ client page
+- Customer Notification Alert Management Module + Email Notification
 
 ###### Summary of completed modules
 

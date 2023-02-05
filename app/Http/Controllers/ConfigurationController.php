@@ -30,7 +30,10 @@ class ConfigurationController extends Controller
         /**
          * Reserved
          */
-        $this->reservedConfigurations = [];
+        $this->reservedConfigurations = [
+            'alert_system_notification',
+            'alert_email_notification'
+        ];
     }
 
     /**

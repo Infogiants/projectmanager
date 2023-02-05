@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Store;
-use App\Configuration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +12,7 @@ use Storage;
 
 class StoreController extends Controller
 {
-    
+
     /**
      * Create a new controller instance.
      *
@@ -24,7 +23,7 @@ class StoreController extends Controller
         $this->middleware(['auth', 'verified']);
         $this->middleware('role:admin');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +37,7 @@ class StoreController extends Controller
             $stores = Store::where('user_id', Auth::user()->id)->orderByDesc('id')->paginate(4);
         endif;
         return view('stores.index', compact('stores'));
-        
+
     }
 
     /**
@@ -47,13 +46,13 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {  
+    {
        $stores = Store::where('user_id', Auth::user()->id)->orderByDesc('id')->paginate(4);
-       
+
        if(count($stores) > 0) {
         return redirect('/stores');
        } else {
-        return view('stores.create');    
+        return view('stores.create');
        }
     }
 
@@ -64,9 +63,9 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         $store = Store::find($id);
-        
+
         if ($store) {
             if ($store->user_id == Auth::user()->id):
                 return view('stores.edit', compact('store'));
@@ -112,14 +111,14 @@ class StoreController extends Controller
         if ($validator->fails()) {
             return redirect('stores/create')->withErrors($validator)->withInput();
         }
-        
+
         if (!empty($file)) {
             $request->file('store_logo')->store('public');
-            $fileName = $request->file('store_logo')->hashName();    
+            $fileName = $request->file('store_logo')->hashName();
         } else {
             $fileName = '';
         }
-        
+
         $store = new Store([
             'user_id' => Auth::user()->id,
             'store_logo' => $fileName ?? '',
@@ -133,24 +132,6 @@ class StoreController extends Controller
         ]);
         $store->save();
 
-        //Add required system shipping configurations
-        Configuration::where('user_id', Auth::user()->id)->delete();
-        $configuration = new Configuration([
-            'user_id' => Auth::user()->id,
-            'name' => 'Delivery Charge Amount',
-            'path' => 'delivery_charge_amount',
-            'value' => 10
-        ]);
-        $configuration->save();
-        
-        $configuration = new Configuration([
-            'user_id' => Auth::user()->id,
-            'name' => 'Free Delivery Above Order Total',
-            'path' => 'delivery_free_amount',
-            'value' => 100
-        ]);
-        $configuration->save();
-        
         return redirect('/stores')->with('success', 'Store saved!');
     }
 
@@ -212,7 +193,7 @@ class StoreController extends Controller
             //Delete old file
             Storage::delete('/public/' . $store->store_logo);
             $request->file('store_logo')->store('public');
-            $fileName = $request->file('store_logo')->hashName();    
+            $fileName = $request->file('store_logo')->hashName();
         } else {
             $fileName = $store->store_logo;
         }
@@ -236,17 +217,17 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {
         //Allow admin role to delete only
         if (!in_array('admin', Auth::user()->roles->pluck('slug')->toArray())):
             return redirect('/stores')->with('errors', 'Access denied!');
-        endif;    
+        endif;
 
         $store = Store::find($id);
         if ($store) {
             Storage::delete('/public/' . $store->store_logo);
             $store->delete();
-            return redirect('/stores')->with('success', 'Store deleted!');  
+            return redirect('/stores')->with('success', 'Store deleted!');
         } else {
             return redirect('/stores')->with('errors', 'Invalid store to delete!');
         }
