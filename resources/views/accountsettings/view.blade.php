@@ -36,7 +36,12 @@
                         @csrf
                         @foreach($configurations as $configuration)
                             <div class="form-group">
-                                <label for="alert_system_notification">{{$configuration->name}}: <input type="checkbox" class="form-control" name="{{$configuration->path}}" value="{{ $configuration->value }}" {{$configuration->value == "1" ? "checked": ""}} /></label>
+                                <label for="alert_system_notification">{{$configuration->name}}:
+                                    <select class="form-control {{ $errors->has($configuration->path) ? 'is-invalid' : '' }}" id="{{$configuration->path}}" name="{{$configuration->id}}" value="{{ old($configuration->path) }}">
+                                        <option value="1" <?php echo ($configuration->user_value == "1" ? "selected": "") ?>>Enabled</option>
+                                        <option value="0" <?php echo ($configuration->user_value == "0" ? "selected": "") ?>>Disabled</option>
+                                    </select>
+                                </label>
                             </div>
                         @endforeach
                         <button type="submit" class="btn btn-primary float-right">Update</button>

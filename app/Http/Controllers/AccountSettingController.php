@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Configuration;
+use App\AccountSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class AccountSettingController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
-        $this->middleware('role:admin');
+        $this->middleware('role:admin,user');
     }
 
     /**
@@ -32,7 +33,19 @@ class AccountSettingController extends Controller
     public function show()
     {
         $configurations = Configuration::all();
+
+
         if ($configurations) {
+            foreach ($configurations as $configuration) {
+                $accountSettingComputedVal = 0;
+                $accountsettingsVal = AccountSetting::where(
+                    [
+                        ['configuration_id', '=', $configuration->id],
+                        ['user_id', '=', Auth::user()->id]
+                    ])->first();
+                $accountSettingComputedVal = $accountsettingsVal ? $accountsettingsVal->configuration_value : 0;
+                $configuration->user_value = $accountSettingComputedVal;
+            }
             return view('accountsettings.view', compact('configurations'));
         } else {
             return redirect('/')->with('errors', 'Invalid page to view!');
@@ -49,44 +62,31 @@ class AccountSettingController extends Controller
     public function update(Request $request)
     {
 
-        dd($request->all());
+        $inputs = $request->except('_method', '_token');
 
-        $user = User::find(Auth::user()->id);
-
-        $validator = Validator::make($request->all(), [
-            'name'=>'required|string|max:255',
-            'email'=>'required|string|max:255|unique:users,email,'.$user->id
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('/myprofile')->withErrors($validator)->withInput();
+        if (empty($inputs)) {
+            return redirect('/accountsetting')->with('error', 'Please select configurations');
         }
 
-        //Check existing password
-        $currentPassword = $request->input('current_password');
-        if (!empty($currentPassword) && !Hash::check($currentPassword, auth()->user()->password)) {
-            return redirect('/myprofile')->with('errors', 'Invalid current password!')->withInput();
-        }
-
-        //new password
-        $newPassword = $request->input('password');
-        if (!empty($newPassword)) {
-            $validator = Validator::make($request->all(), [
-                'password' => ['required', 'string', 'min:8', 'confirmed']
-            ]);
-
-            if ($validator->fails()) {
-                return redirect('/myprofile')->withErrors($validator)->withInput();
+        foreach ($inputs as $key => $value) {
+            $configuration = Configuration::where('id', $key)->first();
+            if ($configuration) {
+                $accountSetting = AccountSetting::where([['configuration_id', '=', $key],['user_id', '=', Auth::user()->id]])->first();
+                if ($accountSetting) {
+                    //Update
+                    $accountSetting->configuration_value = $value;
+                    $accountSetting->save();
+                } else {
+                    //Insert
+                    $accountSetting = new AccountSetting([
+                        'user_id' => Auth::user()->id,
+                        'configuration_id' => $key,
+                        'configuration_value' => $value
+                    ]);
+                    $accountSetting->save();
+                }
             }
         }
-
-        $user->name =  $request->get('name');
-        $user->email =  $request->get('email');
-        if (!empty($newPassword)) {
-            $user->password =  Hash::make($request->get('password'));
-        }
-        $user->save();
-
-        return redirect('/myprofile')->with('success', 'User profile updated successfully!');
+        return redirect('/accountsetting')->with('success', 'Account Settings updated successfully!');
     }
 }

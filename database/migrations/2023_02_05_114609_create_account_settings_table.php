@@ -14,8 +14,15 @@ class CreateAccountSettingsTable extends Migration
     public function up()
     {
         Schema::create('account_settings', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('configuration_id');
+            $table->string('configuration_value');
             $table->timestamps();
+
+            //FOREIGN KEY CONSTRAINTS
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('configuration_id')->references('id')->on('configurations')->onDelete('cascade');
         });
     }
 
