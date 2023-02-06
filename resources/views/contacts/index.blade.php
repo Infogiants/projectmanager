@@ -4,7 +4,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-address-card text-gray-300"></i> Contacts</h1>
-   <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Export Contacts</a>
+   <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Export Contacts</a> -->
 </div>
 <p class="mb-4">Business contacts section, You can manage your important contact details from this page.</p>
 <div>
@@ -30,6 +30,7 @@
             <thead>
                <tr>
                   <th>ID</th>
+                  <td>Image</th>
                   <th>Name</th>
                   <th>About</th>
                   <th>Email</th>
@@ -42,6 +43,13 @@
                @forelse($contacts as $contact)
                <tr>
                   <td>{{$contact->id}}</td>
+                  <td>
+                    @empty($contact->image)
+                        <img src="{{ '/demo_images/def.jpg' }}" width="48" height="48">
+                    @else
+                        <img src="{{ '/storage/contact_images/'.$contact->image }}" width="48" height="48">
+                    @endempty
+                  </td>
                   <td>{{$contact->first_name}} {{$contact->last_name}}</td>
                   <td>{{$contact->about}}</td>
                   <td>{{$contact->email}}</td>

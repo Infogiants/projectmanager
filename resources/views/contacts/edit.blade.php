@@ -28,7 +28,23 @@
     <form method="post" action="{{ route('contacts.update', $contact->id) }}">
         @method('PATCH')
         @csrf
-
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="image">Image:</label>
+                    <input type="file" class="form-control-file border {{ $errors->has('image') ? 'is-invalid' : '' }}" name="image" value="{{ $contact->image }}" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group text-center">
+                    @empty($contact->image)
+                        <img src="{{ '/demo_images/def.jpg' }}" width="100" height="100">
+                    @else
+                        <img src="{{ '/storage/contact_images/'.$contact->image }}" width="100" height="100">
+                    @endempty
+                </div>
+            </div>
+        </div>
         <div class="form-group">
             <label for="first_name">First Name:</label>
             <input type="text" class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" name="first_name" value="{{ $contact->first_name }}" />

@@ -26,12 +26,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="card shadow">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Edit Account Settings</h6>
-                </div>
-                <div class="card-body">
-                    <form method="post" action="{{ route('saveaccountsetting')}}">
+        <form method="post" action="{{ route('saveaccountsetting')}}">
                         @method('PATCH')
                         @csrf
                         @foreach($configurations as $configuration)
@@ -46,8 +41,6 @@
                         @endforeach
                         <button type="submit" class="btn btn-primary float-right">Update</button>
                     </form>
-                </div>
-            </div>
         </div>
     </div>
 </div>

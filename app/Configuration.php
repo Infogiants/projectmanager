@@ -10,6 +10,6 @@ class Configuration extends Model
         'user_id',
         'name',
         'path',
-        'value'       
+        'value'
     ];
 }

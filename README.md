@@ -23,15 +23,16 @@ It's project manager web application for manging projects, clients, tasks etc fo
 - Project Enviornments Module
 - Project Enviornments Instances Module
 - My Profile page for clients/admin
+- Account Setting modules - Email notification, Alerts notification
 
 ###### In-Progress
 
 - Bug fixing in existing features
-- Account Setting modules - Email notification, Alerts notification
+- Customer Notification Alert Management Module + Email Notification
 
 ###### To-do
 
-- Customer Notification Alert Management Module + Email Notification
+- N/A
 
 ###### Summary of completed modules
 

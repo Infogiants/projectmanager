@@ -569,11 +569,11 @@
                      <div class="card-body">
                         <div class="row no-gutters align-items-center">
                            <div class="col mr-2">
-                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{$projectenvironment->getEnviornment($projectenvironment->environment_id)}} <i class="fas fa-fw fa-list-ul fa text-gray-300"></i>  </div>
-                              <div class="mb-1 font-weight-bold text-gray-800">Url: <a href="{{ $projectenvironment->url }}" target="_blank">{{ $projectenvironment->url }}</a></div>
-                              <div class="mb-1 font-weight-bold text-gray-800">Username: {{ $projectenvironment->username }}</div>
-                              <div class="mb-0 font-weight-bold text-gray-800">Password: {{ $projectenvironment->password }}</div>
-                              <div class="mb-0 font-weight-bold text-gray-800">Summary: {{ $projectenvironment->summary }}</div>
+                              <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">{{$projectenvironment->getEnviornment($projectenvironment->environment_id)}} </div>
+                              <div class="mb-1"><span class="font-weight-bold text-gray-800">Url: </span><a href="{{ $projectenvironment->url }}" target="_blank">{{ $projectenvironment->url }}</a></div>
+                              <div class="mb-1"><span class="font-weight-bold text-gray-800">Username: </span>{{ $projectenvironment->username }}</div>
+                              <div class="mb-1"><span class="font-weight-bold text-gray-800">Password: </span>{{ $projectenvironment->password }}</div>
+                              <div class="mb-0"><span class="font-weight-bold text-gray-800">Summary: </span>{{ $projectenvironment->summary }}</div>
                            </div>
                            <?php if (in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
                            <form action="{{ route('projectenvironments.destroy', $projectenvironment->id)}}" method="post">

@@ -11,7 +11,7 @@ use Storage;
 
 class CategoryController extends Controller
 {
-    
+
     /**
      * Create a new controller instance.
      *
@@ -22,14 +22,14 @@ class CategoryController extends Controller
         $this->middleware(['auth', 'verified']);
         $this->middleware('role:admin');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())):
             $categories = Category::orderBy('id', 'desc')->paginate(4);
         else:
@@ -44,7 +44,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         return view('categories.create');
     }
 
@@ -74,7 +74,7 @@ class CategoryController extends Controller
 
         if (!empty($file)) {
             $request->file('image')->store('public/category_images');
-            $fileName = $request->file('image')->hashName();    
+            $fileName = $request->file('image')->hashName();
         } else {
             $fileName = '';
         }
@@ -86,7 +86,7 @@ class CategoryController extends Controller
             'image' => $fileName,
         ]);
         $category->save();
-        
+
         return redirect('/categories')->with('success', 'Category saved!');
     }
 
@@ -111,7 +111,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if ($category) {
-            return view('categories.edit', compact('category'));   
+            return view('categories.edit', compact('category'));
         } else {
             return redirect('/categories')->with('errors', 'Invalid category to edit!');
         }
@@ -130,9 +130,9 @@ class CategoryController extends Controller
         $file = $request->file('image');
         $validator = Validator::make($request->all(), [
             'name'=> 'required|string|max:255|unique:categories,name,'.$category->id,
-            
+
         ]);
-        
+
         if (!empty($file)) {
             $validator = Validator::make($request->all(), [
                 'name'=> 'required|string|max:255|unique:categories,name,'.$category->id,
@@ -148,16 +148,16 @@ class CategoryController extends Controller
             //Delete old file
             Storage::delete('/public/category_images/' . $category->image);
             $request->file('image')->store('public/category_images');
-            $fileName = $request->file('image')->hashName();    
+            $fileName = $request->file('image')->hashName();
         } else {
             $fileName = $category->image;
         }
-        
+
         $category->name =  $request->get('name');
         $category->slug = strtolower($request->get('name'));
         $category->image =  $fileName;
         $category->save();
-        
+
         return redirect('/categories')->with('success', 'Category updated!');
     }
 
@@ -173,7 +173,7 @@ class CategoryController extends Controller
         if ($category) {
             Storage::delete('/public/category_images/' . $category->image);
             $category->delete();
-            return redirect('/categories')->with('success', 'Category deleted!');  
+            return redirect('/categories')->with('success', 'Category deleted!');
         } else {
             return redirect('/categories')->with('errors', 'Invalid category to delete!');
         }

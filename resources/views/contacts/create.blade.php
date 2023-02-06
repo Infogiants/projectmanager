@@ -26,14 +26,15 @@
         </div>
         @endif
     </div>
-    <form method="post" action="{{ route('contacts.store') }}">
+    <form method="post" action="{{ route('contacts.store') }}" enctype="multipart/form-data">
         @csrf
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control-file border {{ $errors->has('image') ? 'is-invalid' : '' }}" name="image" value="{{ old('image') }}" />
+        </div>
         <div class="form-group">
             <label for="first_name">First Name:</label>
             <input type="text" class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" />
-            <!-- @error('first_name')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror -->
         </div>
         <div class="form-group">
             <label for="last_name">Last Name:</label>
