@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('billings', 'BillingController');
     Route::resource('environments', 'EnvironmentController');
     Route::resource('projectenvironments', 'ProjectEnvironmentController');
+    Route::resource('alertnotifications', 'AlertNotificationController');
 
     //Payment Test
     Route::get('/payment', 'PaymentController@index');
@@ -57,6 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
     //Account Setting
     Route::get('/accountsetting', 'AccountSettingController@show')->name('accountsetting');
     Route::patch('/accountsetting', 'AccountSettingController@update')->name('saveaccountsetting');
+
+    Route::get('/alertnotifications', 'AlertNotificationController@index')->name('alertnotifications');
 });
 
 

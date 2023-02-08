@@ -30,9 +30,8 @@
             <thead>
                <tr>
                   <th>ID</th>
-                  <td>Image</th>
+                  <th>Image</th>
                   <th>Name</th>
-                  <th>About</th>
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Created By</th>
@@ -51,7 +50,6 @@
                     @endempty
                   </td>
                   <td>{{$contact->first_name}} {{$contact->last_name}}</td>
-                  <td>{{$contact->about}}</td>
                   <td>{{$contact->email}}</td>
                   <td>{{$contact->phone}}</td>
                   <td>{{$contact->user_id}}</td>

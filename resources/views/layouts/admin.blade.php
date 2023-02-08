@@ -89,7 +89,7 @@
             <div class="sidebar-heading">
                 Addons
             </div>
-            <li class="nav-item {{ (request()->is('configurations*')) ? 'active' : '' }}">
+            <li class="nav-item {{ (request()->is('configurations*') || request()->is('alertnotifications*')) ? 'active' : '' }}">
                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="{{ (request()->is('configurations*')) ? 'true' : 'false' }}" aria-controls="collapseUtilities">
                <i class="fas fa-fw fa-wrench"></i>
                <span>Utilities</span>
@@ -98,6 +98,7 @@
                   <div class="bg-white py-2 collapse-inner rounded">
                      <h6 class="collapse-header">Utilities:</h6>
                      <a class="collapse-item {{ (request()->is('configurations*')) ? 'active' : '' }}" href="{{ url('/configurations') }}">Configurations</a>
+                     <a class="collapse-item {{ (request()->is('alertnotifications*')) ? 'active' : '' }}" href="{{ url('/alertnotifications') }}">Alert Notifications</a>
                   </div>
                </div>
             </li>
@@ -107,6 +108,12 @@
                <a class="nav-link" href="{{ url('/projects') }}">
                <i class="fas fa-fw fa-cubes"></i>
                <span>Projects</span></a>
+            </li>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item {{ (request()->is('alertnotifications*')) ? 'active' : '' }}">
+               <a class="nav-link" href="{{ url('/alertnotifications') }}">
+               <i class="fas fa-fw fa-cubes"></i>
+               <span>Alert Notifications</span></a>
             </li>
             <?php endif; ?>
             <!-- Divider -->
@@ -161,19 +168,38 @@
                            </form>
                         </div>
                      </li>
+
                      <!-- Nav Item - Alerts -->
                      <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <i class="fas fa-bell fa-fw"></i>
                            <!-- Counter - Alerts -->
-                           <span class="badge badge-danger badge-counter">3+</span>
+                           <span class="badge badge-danger badge-counter">{{$notificationscount}}</span>
                         </a>
                         <!-- Dropdown - Alerts -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                            <h6 class="dropdown-header">
                               Alerts Center
                            </h6>
-                           <a class="dropdown-item d-flex align-items-center" href="#">
+                           @forelse($notifications as $notification)
+                              <?php $type = $notification->getTypeById($notification->type); ?>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                 <div class="mr-3">
+                                    <div class="icon-circle {{$type['background']}}">
+                                       <i class="{{$type['icon']}}"></i>
+                                    </div>
+                                 </div>
+                                 <div>
+                                    <div class="small text-gray-500">{{  \Carbon\Carbon::parse($notification->created_at)->format('F j, Y') }}</div>
+                                    <span class="font-weight-bold">{{ $notification->title }}</span>
+                                 </div>
+                              </a>
+                           @empty
+                              <a class="dropdown-item text-center small text-gray-500" href="#">No Notifications</a>
+                           @endforelse
+                           <a class="dropdown-item text-center small text-gray-500" href="{{ route('alertnotifications') }}">Show All Alerts</a>
+
+                           <!-- <a class="dropdown-item d-flex align-items-center" href="#">
                               <div class="mr-3">
                                  <div class="icon-circle bg-primary">
                                     <i class="fas fa-file-alt text-white"></i>
@@ -205,8 +231,7 @@
                                  <div class="small text-gray-500">December 2, 2019</div>
                                  Spending Alert: We've noticed unusually high spending for your account.
                               </div>
-                           </a>
-                           <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                           </a> -->
                         </div>
                      </li>
                      <!-- Nav Item - Messages -->

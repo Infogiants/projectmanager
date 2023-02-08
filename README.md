@@ -32,7 +32,7 @@ It's project manager web application for manging projects, clients, tasks etc fo
 
 ###### To-do
 
-- N/A
+- Admin dashboard analytics make dynamic for all project earning & filter project wise
 
 ###### Summary of completed modules
 

@@ -9,7 +9,6 @@ use App\Permission;
 use App\Store;
 use App\Category;
 use App\Project;
-use App\Order;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller {
@@ -56,14 +55,13 @@ class HomeController extends Controller {
         else:
             $projects = Project::where('client_user_id', Auth::user()->id)->orderByDesc('id')->count();
             $store = Store::where('user_id', '<>', Auth::user()->id)->orderByDesc('id')->get()->first();
-
             // dd($store);
 
             return view(
                 'userhome',
                 [
                     'projects' => $projects,
-                    'store' => (!empty($store) ? $store : ''),
+                    'store' => (!empty($store) ? $store : '')
                 ]
             );
         endif;
