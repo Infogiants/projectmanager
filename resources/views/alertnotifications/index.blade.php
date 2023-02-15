@@ -19,9 +19,11 @@
    </div>
    @endif
 </div>
+<?php if(in_array('admin', Auth::user()->roles->pluck('slug')->toArray())): ?>
 <div>
    <a href="{{ route('alertnotifications.create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus" aria-hidden="true"></i> Add New Alert Notifications</a>
 </div>
+<?php endif; ?>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
    <div class="card-body">
